@@ -4,8 +4,11 @@ public class ResponsiveUI : MonoBehaviour
 {
     private UIUtils _uiUtils;
     [SerializeField] private Vector2 _iPhone12Resolution = new Vector2(1170, 2532);
-    [SerializeField] private Camera _cam;
-    [SerializeField] private GameObject _uiMom;
+    private Camera _cam;
+    private GameObject _uiMom;
+
+
+    [SerializeField] private GameObject _tile;
     
     private void Awake()
     {
