@@ -1,14 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Drawing : MonoBehaviour
+public class DrawToGrid : MonoBehaviour
 {
     private Camera _cam;
+    [SerializeField] bool[] _mapGrid = new bool[140];
     
     void Start()
     {
         _cam = Camera.main;
+        for (int i = 0; i<_mapGrid.Length; i++)
+        {
+            _mapGrid[i] = false;
+        }
     }
 
     void Update()
@@ -18,10 +21,11 @@ public class Drawing : MonoBehaviour
         Vector3 touchPoint = _cam.ScreenToWorldPoint(Input.GetTouch(0).position);
         RaycastHit2D hit = Physics2D.Raycast((Vector2)touchPoint, _cam.transform.forward, 100.0f);
         if (!hit) return;
-        
         if (hit.collider.gameObject.TryGetComponent<SpriteRenderer>(out var sr))
         {
+            if (_mapGrid[hit.collider.gameObject.transform.GetSiblingIndex()] == true) return;
             sr.color = Color.black;
+            _mapGrid[hit.collider.gameObject.transform.GetSiblingIndex()] = true;
         }
     }
     
