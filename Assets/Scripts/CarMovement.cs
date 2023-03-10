@@ -1,29 +1,21 @@
 using UnityEngine;
-
+using System.Collections.Generic;
 public class CarMovement : MonoBehaviour
 {
-    private Rigidbody2D rb2;
+    [SerializeField] private GameObject[] _wheels;
+    private List<Rigidbody2D> rb2 = new();
     [SerializeField] private float speed = 20.0f;
+    [SerializeField] private GridToWheel _gtw;
     private void Awake()
     {
-        rb2 = GetComponent<Rigidbody2D>();
+        foreach (var wheel in _wheels)
+        {
+            rb2.Add(wheel.GetComponent<Rigidbody2D>());
+        }
     }
-
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void FixedUpdate()
     {
-        rb2.AddTorque(-speed * Time.fixedDeltaTime);
+        if (!_gtw.isStarted) return;
+        rb2[0].AddTorque(-speed * Time.fixedDeltaTime);
     }
 }
