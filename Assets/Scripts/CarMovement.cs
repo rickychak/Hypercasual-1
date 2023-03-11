@@ -4,7 +4,8 @@ public class CarMovement : MonoBehaviour
 {
     [SerializeField] private GameObject[] _wheels;
     private List<Rigidbody2D> rb2 = new();
-    [SerializeField] private float speed = 20.0f;
+    [SerializeField] private float _speed = -20.0f;
+    [SerializeField] private float _capVel = -500.0f;
     [SerializeField] private GridToWheel _gtw;
     private void Awake()
     {
@@ -16,6 +17,10 @@ public class CarMovement : MonoBehaviour
     private void FixedUpdate()
     {
         if (!_gtw.isStarted) return;
-        rb2[0].AddTorque(-speed * Time.fixedDeltaTime);
+        if (rb2[0].angularVelocity < _capVel) return;
+        foreach (var rb in rb2)
+        {
+            rb.angularVelocity += _speed;
+        }
     }
 }
