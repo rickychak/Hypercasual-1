@@ -1,84 +1,136 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
+
+public struct Wheel
+{
+    public GameObject WheelGameObject { get; set; }
+    public Transform WheelTransform { get; set; }
+    public Rigidbody2D WheelRigidBody { get; set; }
+        
+}
 public class GridToWheel : MonoBehaviour
 {
     [SerializeField] private DrawToGrid _mapGrid;
     [SerializeField] private GameObject _vehicle;
+    [SerializeField] private GameObject _buttonParent;
     
     private bool[] _wheelGrid;
     public bool isStarted { get; set; }
     
-    private GameObject[] _wheels = new GameObject[2];
+    //private GameObject[] _wheels = new GameObject[2];
+    private GameObject[] _btns = new GameObject[2];
     private List<SpriteRenderer>[] _spriteRendererList = new List<SpriteRenderer>[2];
     private List<BoxCollider2D>[] _boxCollider2DList = new List<BoxCollider2D>[2];
-    
+    private Vector3[] _wheelPositions = new Vector3[2];
+    private Wheel[] _wheels = new Wheel[2];
+
     private Color _fullAlpha = Color.black;
     private Color _transparent = new Color(255, 255, 255, 0);
+    private Quaternion _quatZero = Quaternion.identity;
+    private Vector3 _vehicleOriginalPosition;
+
+    
     // Start is called before the first frame update
-    void Start()
-    {
+    
+    void Awake(){
         for (int i = 0; i < _vehicle.transform.childCount; i++)
         {
-            _wheels[i] = _vehicle.transform.GetChild(i).gameObject;
+            _wheels[i].WheelGameObject = _vehicle.transform.GetChild(i).gameObject;
+            _wheels[i].WheelTransform = _wheels[i].WheelGameObject.transform;
+            _wheels[i].WheelRigidBody = _wheels[i].WheelGameObject.GetComponent<Rigidbody2D>();
+
         }
-
+        for (int i = 0; i < _buttonParent.transform.childCount; i++)
+        {
+            _btns[i] = _buttonParent.transform.GetChild(i).gameObject;
+            
+        }
         _wheelGrid = _mapGrid.MapGridGetter();
-
+        _vehicleOriginalPosition = _vehicle.transform.position;
+    }
+    
+    void Start()
+    {
         for (int i = 0; i < 2; i++)
         {
-            var children = _wheels[i].transform;
+            var children = _wheels[i].WheelGameObject.transform;
             _spriteRendererList[i] = new List<SpriteRenderer>();
             _boxCollider2DList[i] = new List<BoxCollider2D>();
-            
+
             for (int j = 0; j < _wheelGrid.Length; j++)
             {
-                if (!children.GetChild(j).transform.TryGetComponent(out SpriteRenderer sr) || !children.GetChild(j).transform.TryGetComponent(out BoxCollider2D bc2)) return;
+                if (!children.GetChild(j).transform.TryGetComponent(out SpriteRenderer sr) ||
+                    !children.GetChild(j).transform.TryGetComponent(out BoxCollider2D bc2)) return;
                 _spriteRendererList[i].Add(sr);
                 _boxCollider2DList[i].Add(bc2);
             }
         }
-        
         OnStartSetup();
-
     }
-
+    private void WheelReset()
+    {
+        for (int i = 0; i < _wheels.Length; i++)
+        {
+            _wheels[i].WheelRigidBody.simulated = false;
+            _wheels[i].WheelRigidBody.angularVelocity = 0;
+            _wheels[i].WheelGameObject.transform.position = _wheels[i].WheelTransform.position;
+            _wheels[i].WheelGameObject.transform.rotation = _quatZero;
+            for (int j = 0; j < _wheelGrid.Length; j++)
+            {
+                if (!_wheelGrid[j]) continue;
+                _spriteRendererList[i][j].color = _transparent;
+                _boxCollider2DList[i][j].enabled = false;
+                
+            }
+        }
+    }
+    private void WheelSet()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            _wheels[i].WheelRigidBody.simulated = true;
+            for (int j = 0; j < _wheelGrid.Length; j++)
+            {
+                if (!_wheelGrid[j]) continue;
+                _spriteRendererList[i][j].color = _fullAlpha;
+                _boxCollider2DList[i][j].enabled = true;
+            }
+        }
+    }
     private void OnStartSetup()
     {
         isStarted = false;
         _vehicle.GetComponent<Rigidbody2D>().simulated = false;
-        foreach (var wheel in _wheels)
-        {
-            wheel.GetComponent<Rigidbody2D>().simulated = false;
-        }
         
     }
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    } 
+        if (!isStarted) return;
+        isStarted = false;
+        _vehicle.GetComponent<Rigidbody2D>().simulated = false;
+        _vehicle.transform.position = _vehicleOriginalPosition;
+        _vehicle.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        WheelReset();
+        foreach (var btn in _btns)
+        {
+            btn.SetActive(!(btn.activeSelf));
+        }
+        
+    }
+
+    
     public void StartGame()
     {
+        if (isStarted) return;
         isStarted = true;
         _vehicle.GetComponent<Rigidbody2D>().simulated = true;
-        for (int i = 0; i < 2; i++)
+        foreach (var btn in _btns)
         {
-            _wheels[i].GetComponent<Rigidbody2D>().simulated = true;
-            for (int j = 0; j < _wheelGrid.Length; j++)
-            {
-                if (_wheelGrid[j])
-                {
-                    _spriteRendererList[i][j].color = _fullAlpha;
-                    _boxCollider2DList[i][j].enabled = true;
-                }
-                else
-                {
-                    _spriteRendererList[i][j].color = _transparent;
-                    _boxCollider2DList[i][j].enabled = false;
-                }
-            }
+            btn.SetActive(!(btn.activeSelf));
         }
+        WheelSet();
+
     }
 }
