@@ -7837,6 +7837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mapParent: {fileID: 372717173}
+  _canvas: {fileID: 1773069454}
 --- !u!1001 &1579352909
 PrefabInstance:
   m_ObjectHideFlags: 0
