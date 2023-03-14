@@ -18,13 +18,12 @@ public class GridToWheel : MonoBehaviour
     
     private bool[] _wheelGrid;
     public bool isStarted { get; set; }
-    
-    //private GameObject[] _wheels = new GameObject[2];
     private GameObject[] _btns = new GameObject[2];
     private List<SpriteRenderer>[] _spriteRendererList = new List<SpriteRenderer>[2];
     private List<BoxCollider2D>[] _boxCollider2DList = new List<BoxCollider2D>[2];
     private Vector3[] _wheelPositions = new Vector3[2];
     private Wheel[] _wheels = new Wheel[2];
+    
 
     private Color _fullAlpha = Color.black;
     private Color _transparent = new Color(255, 255, 255, 0);
@@ -113,6 +112,7 @@ public class GridToWheel : MonoBehaviour
         _vehicle.transform.position = _vehicleOriginalPosition;
         _vehicle.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         WheelReset();
+        _mapGrid.MapGridReset();
         foreach (var btn in _btns)
         {
             btn.SetActive(!(btn.activeSelf));
