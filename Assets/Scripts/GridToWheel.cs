@@ -21,14 +21,11 @@ public class GridToWheel : MonoBehaviour
     private GameObject[] _btns = new GameObject[2];
     private List<SpriteRenderer>[] _spriteRendererList = new List<SpriteRenderer>[2];
     private List<BoxCollider2D>[] _boxCollider2DList = new List<BoxCollider2D>[2];
-    private Vector3[] _wheelPositions = new Vector3[2];
     private Wheel[] _wheels = new Wheel[2];
     
 
     private Color _fullAlpha = Color.black;
     private Color _transparent = new Color(255, 255, 255, 0);
-    private Quaternion _quatZero = Quaternion.identity;
-    private Vector3 _vehicleOriginalPosition;
 
     
     // Start is called before the first frame update
@@ -47,7 +44,6 @@ public class GridToWheel : MonoBehaviour
             
         }
         _wheelGrid = _mapGrid.MapGridGetter();
-        _vehicleOriginalPosition = _vehicle.transform.position;
     }
     
     void Start()
@@ -70,12 +66,10 @@ public class GridToWheel : MonoBehaviour
     }
     private void WheelReset()
     {
+        Wheels.Instance.ResetWheel();
         for (int i = 0; i < _wheels.Length; i++)
         {
-            _wheels[i].WheelRigidBody.simulated = false;
-            _wheels[i].WheelRigidBody.angularVelocity = 0;
-            _wheels[i].WheelGameObject.transform.position = _wheels[i].WheelTransform.position;
-            _wheels[i].WheelGameObject.transform.rotation = _quatZero;
+            
             for (int j = 0; j < _wheelGrid.Length; j++)
             {
                 if (!_wheelGrid[j]) continue;
@@ -87,9 +81,9 @@ public class GridToWheel : MonoBehaviour
     }
     private void WheelSet()
     {
+        Wheels.Instance.SetWheel();
         for (int i = 0; i < 2; i++)
         {
-            _wheels[i].WheelRigidBody.simulated = true;
             for (int j = 0; j < _wheelGrid.Length; j++)
             {
                 if (!_wheelGrid[j]) continue;
@@ -101,17 +95,16 @@ public class GridToWheel : MonoBehaviour
     private void OnStartSetup()
     {
         isStarted = false;
-        _vehicle.GetComponent<Rigidbody2D>().simulated = false;
+        Vehicle.Instance.StopVehicle();
+        //_vehicle.GetComponent<Rigidbody2D>().simulated = false;
         
     }
     public void RestartGame()
     {
         if (!isStarted) return;
         isStarted = false;
-        _vehicle.GetComponent<Rigidbody2D>().simulated = false;
-        _vehicle.transform.position = _vehicleOriginalPosition;
-        _vehicle.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         WheelReset();
+        Vehicle.Instance.StopVehicle();
         _mapGrid.MapGridReset();
         foreach (var btn in _btns)
         {
@@ -125,7 +118,8 @@ public class GridToWheel : MonoBehaviour
     {
         if (isStarted) return;
         isStarted = true;
-        _vehicle.GetComponent<Rigidbody2D>().simulated = true;
+        Vehicle.Instance.StartVehicle();
+        Wheels.Instance.SetVelocity();
         foreach (var btn in _btns)
         {
             btn.SetActive(!(btn.activeSelf));

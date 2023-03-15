@@ -11,17 +11,20 @@ public class Score : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!ScoreReset()) return;
+        if(!UploadScore()) return;
         _score += Time.deltaTime;
         _text.text = _score.ToString("0.00");
     }
 
-    public bool ScoreReset()
+
+    public bool UploadScore()
     {
         if (_grid.isStarted) return _grid.isStarted;
-            
+        if (_score < Controllables.Instance.highestScore) return _grid.isStarted;
+        Controllables.Instance.highestScore = _score;
         _score = 0;
         _text.text = "0.00";;
         return _grid.isStarted;
+
     }
 }

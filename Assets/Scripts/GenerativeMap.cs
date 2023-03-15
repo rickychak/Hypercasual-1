@@ -12,12 +12,11 @@ public class GenerativeMap : MonoBehaviour
 {
 
     [SerializeField] private GameObject _mapParent;
-
-    [SerializeField] private GameObject _canvas;
+    [SerializeField] private GameObject _leftBound;
     // Start is called before the first frame update
     private List<Map> _mapList = new();
     private Vector3 _mapMoveVel = Vector3.one;
-    private Vector3 testing;
+    private Vector3 _rightVec = Vector3.right;
     void Awake()
     {
         for (int i = 0; i < _mapParent.transform.childCount; i++)
@@ -37,7 +36,7 @@ public class GenerativeMap : MonoBehaviour
     {
         foreach (var map in _mapList)
         {
-            map.mapTransform.GetComponent<Rigidbody2D>().velocity = _mapMoveVel*-2.0f;
+            map.mapTransform.GetComponent<Rigidbody2D>().velocity = _mapMoveVel*Controllables.Instance.mapVelocity;
         }
     }
 
@@ -51,6 +50,12 @@ public class GenerativeMap : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        testing = transform.TransformPoint(_canvas.transform.position);
+        foreach (var map in _mapList)
+        {
+            if (map.mapTransform.position.x < _leftBound.transform.position.x)
+            {
+                map.mapTransform.position += Controllables.Instance.mapOffset;
+            }
+        }
     }
 }
