@@ -1312,11 +1312,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3144163060203481802, guid: c8ad900eb454dc7408d5d0028379686f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.84
+      value: 24.7
       objectReference: {fileID: 0}
     - target: {fileID: 3144163060203481802, guid: c8ad900eb454dc7408d5d0028379686f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.19
+      value: 0.36
       objectReference: {fileID: 0}
     - target: {fileID: 3144163060203481802, guid: c8ad900eb454dc7408d5d0028379686f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2047,7 +2047,7 @@ GameObject:
   - component: {fileID: 734820883}
   m_Layer: 5
   m_Name: Left Bound
-  m_TagString: Untagged
+  m_TagString: Boundary
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6983,6 +6983,7 @@ GameObject:
   - component: {fileID: 1254812449}
   - component: {fileID: 1254812452}
   - component: {fileID: 1254812453}
+  - component: {fileID: 1254812454}
   m_Layer: 6
   m_Name: Vehicle
   m_TagString: Untagged
@@ -7116,6 +7117,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ba4a45837bb9f24aa4b8df72170ebd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1254812454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1254812448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f72b110f2f2c453e8ed1cce3b2ddf164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1280762558 stripped
@@ -7838,11 +7851,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3144163060203481802, guid: c8ad900eb454dc7408d5d0028379686f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 24.7
+      value: 14.84
       objectReference: {fileID: 0}
     - target: {fileID: 3144163060203481802, guid: c8ad900eb454dc7408d5d0028379686f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.36
+      value: 0.19
       objectReference: {fileID: 0}
     - target: {fileID: 3144163060203481802, guid: c8ad900eb454dc7408d5d0028379686f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14063,7 +14076,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0684ee7a37c1874581440b7ea383d66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _grid: {fileID: 1577113991}
   _text: {fileID: 2087744205}
 --- !u!1 &2084320541 stripped
 GameObject:

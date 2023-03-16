@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -105,6 +106,7 @@ public class GridToWheel : MonoBehaviour
         isStarted = false;
         WheelReset();
         Vehicle.Instance.StopVehicle();
+        Score.Instance.UploadScore();
         _mapGrid.MapGridReset();
         foreach (var btn in _btns)
         {
@@ -113,7 +115,12 @@ public class GridToWheel : MonoBehaviour
         
     }
 
-    
+    private void Update()
+    {
+        if (!isStarted) return;
+        Score.Instance.UpdateScore();
+    }
+
     public void StartGame()
     {
         if (isStarted) return;
