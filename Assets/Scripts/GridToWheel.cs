@@ -45,6 +45,7 @@ public class GridToWheel : MonoBehaviour
             
         }
         _wheelGrid = _mapGrid.MapGridGetter();
+        
     }
     
     void Start()
@@ -64,6 +65,7 @@ public class GridToWheel : MonoBehaviour
             }
         }
         OnStartSetup();
+        Score.Instance.ScoreStartSetup();
     }
     private void WheelReset()
     {
