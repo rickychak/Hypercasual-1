@@ -10,6 +10,8 @@ public struct Map
 }
 public class GenerativeMap : MonoBehaviour
 {
+
+    public static GenerativeMap Instance;
     [SerializeField] private GameObject _mapParent;
     [SerializeField] private GameObject _leftBound;
 
@@ -21,7 +23,8 @@ public class GenerativeMap : MonoBehaviour
     // Start is called before the first frame update
     private List<Map> _mapList = new();
     private Vector3 _mapMoveVel = Vector3.one;
-    void Awake()
+
+    public void MapStartSetup()
     {
         for (int i = 0; i < _mapParent.transform.childCount; i++)
         {
@@ -34,7 +37,6 @@ public class GenerativeMap : MonoBehaviour
 
         _mapQueueFirstObject = _mapQueue.Peek();
     }
-
     public void MapSetStartVelocity()
     {
         foreach (var map in _mapList)
@@ -50,8 +52,7 @@ public class GenerativeMap : MonoBehaviour
             map.mapTransform.GetComponent<Rigidbody2D>().velocity = _mapMoveVel*0.0f;
         }
     }
-    // Update is called once per frame
-    void FixedUpdate()
+    public void GenerateMapOnFixedUpdate()
     {
         if (_mapQueueFirstObject.transform.position.x >= _leftBound.transform.position.x) return;
         var mapQueueTailPosition = _mapQueueLastObject.transform.position;
@@ -61,12 +62,21 @@ public class GenerativeMap : MonoBehaviour
         _mapQueueFirstObject = _mapQueue.Peek();
         var position = _mapQueueLastObject.transform.position;
         if (position.y >= 0.0f) return;
-        position = new Vector3(position.x, 0, position.z);
+        position = new Vector3(position.x, Random.Range(0,0.6f), position.z);
         _mapQueueLastObject.transform.position = position;
-        
-        
-        
-        
-        
     }
+
+
+    private void OnEnable()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(this);
+        }
+    }
+    
 }

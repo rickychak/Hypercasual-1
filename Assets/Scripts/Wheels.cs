@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,9 @@ public class Wheels : MonoBehaviour
     private Quaternion _zeroRotation = Quaternion.identity;
     
     // Start is called before the first frame update
-    void Start()
+   
+
+    public void WheelsStartSetup()
     {
         _wheelJoint2Ds = transform.GetComponentsInChildren<WheelJoint2D>();
         _wheelRigidbody2Ds = transform.GetComponentsInChildren<Rigidbody2D>();
@@ -54,6 +57,10 @@ public class Wheels : MonoBehaviour
             wheelRigidBody2D.simulated = true;
         }
     }
+
+
+    
+
     private void OnEnable()
     {
         if (Instance == null)

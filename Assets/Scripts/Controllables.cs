@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 [CreateAssetMenu(fileName = "so_controllable", menuName = "Assets/Parameters")]
 public class Controllables : ScriptableObject
@@ -17,7 +18,18 @@ public class Controllables : ScriptableObject
     public Vector3[] wheelOriginalPositions = new Vector3[2];
     
     public float highestScore = 0;
-
+    [InitializeOnEnterPlayMode]
+    private void Init()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(this);
+        } 
+    }
     private void OnEnable()
     {
         if (Instance == null)

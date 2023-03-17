@@ -30,6 +30,8 @@ public class Score : MonoBehaviour
             Controllables.Instance.highestScore = _score;
             _highestScoreText.text = _score.ToString("0.00");
         };
+        _score = 0;
+        _text.text = "0.00";
         
     }
     

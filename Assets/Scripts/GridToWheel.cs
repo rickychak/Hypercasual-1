@@ -13,6 +13,7 @@ public struct Wheel
 }
 public class GridToWheel : MonoBehaviour
 {
+    
     [SerializeField] private DrawToGrid _mapGrid;
     [SerializeField] private GameObject _vehicle;
     [SerializeField] private GameObject _buttonParent;
@@ -65,7 +66,6 @@ public class GridToWheel : MonoBehaviour
             }
         }
         OnStartSetup();
-        Score.Instance.ScoreStartSetup();
     }
     private void WheelReset()
     {
@@ -110,10 +110,7 @@ public class GridToWheel : MonoBehaviour
         Vehicle.Instance.StopVehicle();
         Score.Instance.UploadScore();
         _mapGrid.MapGridReset();
-        foreach (var btn in _btns)
-        {
-            btn.SetActive(!(btn.activeSelf));
-        }
+        Buttons.Instance.ToggleButton();
         
     }
 
@@ -129,10 +126,7 @@ public class GridToWheel : MonoBehaviour
         isStarted = true;
         Vehicle.Instance.StartVehicle();
         Wheels.Instance.SetVelocity();
-        foreach (var btn in _btns)
-        {
-            btn.SetActive(!(btn.activeSelf));
-        }
+        Buttons.Instance.ToggleButton();
         WheelSet();
 
     }

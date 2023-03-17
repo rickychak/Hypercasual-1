@@ -12,6 +12,12 @@ public class Vehicle: MonoBehaviour
         _rb2D = GetComponent<Rigidbody2D>();
     }
 
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (!col.transform.CompareTag("Boundary")) return;
+        Debug.Log("GameOver");
+    }
+    
     public void StopVehicle()
     {
         _rb2D.simulated = false;
