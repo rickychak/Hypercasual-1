@@ -13,10 +13,10 @@ public struct Wheel
 }
 public class GridToWheel : MonoBehaviour
 {
+    public static GridToWheel Instance;
     
     [SerializeField] private DrawToGrid _mapGrid;
     [SerializeField] private GameObject _vehicle;
-    [SerializeField] private GameObject _buttonParent;
     
     private bool[] _wheelGrid;
     public bool isStarted { get; set; }
@@ -40,16 +40,11 @@ public class GridToWheel : MonoBehaviour
             _wheels[i].WheelRigidBody = _wheels[i].WheelGameObject.GetComponent<Rigidbody2D>();
 
         }
-        for (int i = 0; i < _buttonParent.transform.childCount; i++)
-        {
-            _btns[i] = _buttonParent.transform.GetChild(i).gameObject;
-            
-        }
         _wheelGrid = _mapGrid.MapGridGetter();
         
     }
-    
-    void Start()
+
+    public void GridToWheelStartSetup()
     {
         for (int i = 0; i < 2; i++)
         {
@@ -65,11 +60,11 @@ public class GridToWheel : MonoBehaviour
                 _boxCollider2DList[i].Add(bc2);
             }
         }
-        OnStartSetup();
+        isStarted = false;
     }
-    private void WheelReset()
+    public void ResetWheelAndGrid()
     {
-        Wheels.Instance.ResetWheel();
+        
         for (int i = 0; i < _wheels.Length; i++)
         {
             
@@ -82,10 +77,10 @@ public class GridToWheel : MonoBehaviour
             }
         }
     }
-    private void WheelSet()
+    public void SetGridToWheel()
     {
-        Wheels.Instance.SetWheel();
-        for (int i = 0; i < 2; i++)
+        
+        for (int i = 0; i < _wheels.Length; i++)
         {
             for (int j = 0; j < _wheelGrid.Length; j++)
             {
@@ -95,39 +90,27 @@ public class GridToWheel : MonoBehaviour
             }
         }
     }
-    private void OnStartSetup()
+
+    public void StartSignalToggle()
     {
-        isStarted = false;
-        Vehicle.Instance.StopVehicle();
-        //_vehicle.GetComponent<Rigidbody2D>().simulated = false;
-        
-    }
-    public void RestartGame()
-    {
-        if (!isStarted) return;
-        isStarted = false;
-        WheelReset();
-        Vehicle.Instance.StopVehicle();
-        Score.Instance.UploadScore();
-        _mapGrid.MapGridReset();
-        Buttons.Instance.ToggleButton();
-        
+        isStarted = !isStarted;
     }
 
-    private void Update()
+    public bool StartSignalGetter()
     {
-        if (!isStarted) return;
-        Score.Instance.UpdateScore();
+        return isStarted;
     }
-
-    public void StartGame()
+    
+    
+    private void OnEnable()
     {
-        if (isStarted) return;
-        isStarted = true;
-        Vehicle.Instance.StartVehicle();
-        Wheels.Instance.SetVelocity();
-        Buttons.Instance.ToggleButton();
-        WheelSet();
-
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(this);
+        }
     }
 }

@@ -485,8 +485,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1577113991}
-        m_TargetAssemblyTypeName: GridToWheel, Assembly-CSharp
+      - m_Target: {fileID: 1577113994}
+        m_TargetAssemblyTypeName: Gameflow, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
@@ -6262,7 +6262,7 @@ GameObject:
   - component: {fileID: 1039341100}
   m_Layer: 6
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: Boundary
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6607,6 +6607,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1093020626}
+  - component: {fileID: 1093020627}
   m_Layer: 5
   m_Name: Buttons
   m_TagString: Button
@@ -6636,6 +6637,18 @@ RectTransform:
   m_AnchoredPosition: {x: 4, y: -1}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1093020627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1093020625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8280012a514e6c974d4479463022bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1093114420 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7001401936968106703, guid: 25601c8d07b262744a9051429ad6d498, type: 3}
@@ -7022,7 +7035,7 @@ GameObject:
   - component: {fileID: 1254812452}
   - component: {fileID: 1254812453}
   - component: {fileID: 1254812454}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Vehicle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7110,7 +7123,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1254812448}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 2, z: 1}
+  m_LocalPosition: {x: -1, y: 2, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7132,7 +7145,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.015425086, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0.06, y: 0.06, z: 0.06, w: 0.16}
     pivot: {x: 0.5, y: 0.5}
@@ -7143,7 +7156,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.58, y: 0.4}
+  m_Size: {x: 0.8576491, y: 0.4}
   m_EdgeRadius: 0
 --- !u!114 &1254812453
 MonoBehaviour:
@@ -7977,6 +7990,7 @@ GameObject:
   - component: {fileID: 1577113992}
   - component: {fileID: 1577113991}
   - component: {fileID: 1577113993}
+  - component: {fileID: 1577113994}
   m_Layer: 0
   m_Name: Gameplay Manager
   m_TagString: Untagged
@@ -8028,6 +8042,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mapParent: {fileID: 372717173}
   _leftBound: {fileID: 734820882}
+--- !u!114 &1577113994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577113990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c29578980584f20a2f34bb536de0068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1600030334 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5375630741510599029, guid: 25601c8d07b262744a9051429ad6d498, type: 3}
@@ -8919,8 +8945,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1577113991}
-        m_TargetAssemblyTypeName: GridToWheel, Assembly-CSharp
+      - m_Target: {fileID: 1577113994}
+        m_TargetAssemblyTypeName: Gameflow, Assembly-CSharp
         m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:

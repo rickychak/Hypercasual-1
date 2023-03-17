@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class DrawToGrid : MonoBehaviour
 {
+    public static DrawToGrid Instance;
     private Camera _cam;
     [SerializeField] private GameObject _grid;
     [SerializeField] bool[] _mapGrid = new bool[140];
@@ -52,6 +53,17 @@ public class DrawToGrid : MonoBehaviour
         }
     }
     
+    private void OnEnable()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(this);
+        }
+    }
     
 }
 

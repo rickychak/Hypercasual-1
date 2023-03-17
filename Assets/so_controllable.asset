@@ -15,8 +15,8 @@ MonoBehaviour:
   mapVelocity: -1.75
   mapOffset: {x: 28, y: 0, z: 0}
   vehicleVelocity: 600
-  vehicleOriginalPosition: {x: -2, y: 2, z: 1}
+  vehicleOriginalPosition: {x: -1, y: 2, z: 1}
   wheelOriginalPositions:
   - {x: 0.212, y: -1.2, z: 0}
   - {x: -0.206, y: -1.2, z: 0}
-  highestScore: 5.4330587
+  highestScore: 13.038164
