@@ -21,9 +21,9 @@ public class GridModel : MonoBehaviour
         return tmp;
     }
 
-    public void ToggleCell(int index)
+    public void ToggleCell(int index, bool boo)
     {
-        _grid[index] = true;
+        _grid[index] = boo;
     }
 
     public void GridUpdate(bool boo)

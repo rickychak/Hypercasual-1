@@ -17,15 +17,15 @@ public class InputController : MonoBehaviour, IInputController
     [SerializeField] private Tilemap _tileMap;
 
     
-    public void SetCellPosition(Vector3Int cellPosition)
-    {
-        _cellPosition = cellPosition;
-    }
+    // public void SetCellPosition(Vector3Int cellPosition)
+    // {
+    //     _cellPosition = cellPosition;
+    // }
 
-    public Vector3Int GetCellPosition()
-    {
-        return _cellPosition;
-    }
+    // public Vector3Int GetCellPosition()
+    // {
+    //     return _cellPosition;
+    // }
 
 
     void Start()
