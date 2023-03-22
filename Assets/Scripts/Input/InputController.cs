@@ -14,18 +14,6 @@ public class InputController : MonoBehaviour, IInputController
     public event Action<Vector3> InputEvent;
     
     [SerializeField] private LayerMask _layerMask;
-    [SerializeField] private Tilemap _tileMap;
-
-    
-    // public void SetCellPosition(Vector3Int cellPosition)
-    // {
-    //     _cellPosition = cellPosition;
-    // }
-
-    // public Vector3Int GetCellPosition()
-    // {
-    //     return _cellPosition;
-    // }
 
 
     void Start()

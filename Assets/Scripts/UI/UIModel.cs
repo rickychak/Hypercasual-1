@@ -3,32 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+public enum UIState
+{
+    GameStarted,
+    GameEnded
+}
 public class UIModel : MonoBehaviour
 {
-    public enum State
+    
+
+    [SerializeField]private UIState _currentState;
+
+    public void SetUIState(UIState state)
     {
-        GameStart,
-        GameEnd
+        _currentState = state;
     }
 
-    private bool currentStat;
 
-    [SerializeField] private Button _button;
+    public UIState GetUIState()
+    {
+        return _currentState;
+    }
 
     
-    // Start is called before the first frame update
-    State GetStateEnumType()
-    {
-        return typeof(State);
-    }
-
-    /*void DispatchButtonClickedSignal()
-    {
-        buttonEvent?.Invoke();
-    }*/
-
-    public void SetState(string state)
-    {
-        
-    }
 }
