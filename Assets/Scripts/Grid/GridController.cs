@@ -4,7 +4,8 @@ using UnityEngine;
 public class GridController : MonoBehaviour
 {
     private GridModel _gridModel;
-
+    
+    
     private void Start()
     {
         _gridModel = transform.GetComponent<GridModel>();

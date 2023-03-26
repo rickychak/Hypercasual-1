@@ -8,32 +8,17 @@ public class UIController : MonoBehaviour
 {
 
     private UIModel _uiModel;
+    public event Action UIEvent; 
     void Start()
     {
-        _uiModel = transform.GetComponent<UIModel>();
-        _uiModel.SetUIState(UIState.GameEnded);
+        // _uiModel = transform.GetComponent<UIModel>();
+        // _uiModel.SetUIState(UIState.GameEnded);
     }
 
     //TODO: Start Game or Reload Game based on UIState
-    public UIState ToggleButton()
+    public void ToggleButton()
     {
-        var _currentUIState = _uiModel.GetUIState();
-        switch (_currentUIState)
-        {
-            case UIState.GameEnded:
-                _uiModel.SetUIState(UIState.GameStarted);
-                //StartGame
-                break;
-            case UIState.GameStarted:
-                _uiModel.SetUIState(UIState.GameEnded);
-                //StopGame
-                break;
-            default:
-                break;
-            //Start Game
-        }
-
-        return _uiModel.GetUIState();
+        UIEvent?.Invoke();
     }
     
     

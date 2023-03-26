@@ -8,10 +8,10 @@ public enum UIState
     GameStarted,
     GameEnded
 }
-public class UIModel : MonoBehaviour
+public class UIModel
 {
     
-
+    // private StateMachine _stateMachine;
     [SerializeField]private UIState _currentState;
 
     public void SetUIState(UIState state)
