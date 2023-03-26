@@ -7,24 +7,21 @@ using UnityEditor;
 public class UIController : MonoBehaviour
 {
 
-    private UIModel _uiModel;
-    public event Action UIEvent; 
-    void Start()
-    {
-        // _uiModel = transform.GetComponent<UIModel>();
-        // _uiModel.SetUIState(UIState.GameEnded);
-    }
+    [SerializeField] private UIModel _uiModel;
+    [SerializeField] private StateMachine _stateMachine;
 
     //TODO: Start Game or Reload Game based on UIState
     public void ToggleButton()
     {
-        UIEvent?.Invoke();
+        _stateMachine.ChangeState();
     }
-    
-    
-    // Update is called once per frame
-    void Update()
+
+    public Color GetColor(int index)
     {
-        
+        return _uiModel.GetPallete()[index];
+    }
+    public IState GetState()
+    {
+        return _stateMachine.GetState();
     }
 }

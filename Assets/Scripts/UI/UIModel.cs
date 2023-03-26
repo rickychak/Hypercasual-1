@@ -1,29 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using System;
-public enum UIState
+public class UIModel: MonoBehaviour
 {
-    GameStarted,
-    GameEnded
-}
-public class UIModel
-{
-    
-    // private StateMachine _stateMachine;
-    [SerializeField]private UIState _currentState;
 
-    public void SetUIState(UIState state)
+    private Color[] _colorPallete = { new Color(0.43f, 1f, 0.38f), new Color(1f, 0.5f, 0.46f) };
+
+    public Color[] GetPallete()
     {
-        _currentState = state;
+        return _colorPallete;
     }
-
-
-    public UIState GetUIState()
-    {
-        return _currentState;
-    }
-
     
 }
