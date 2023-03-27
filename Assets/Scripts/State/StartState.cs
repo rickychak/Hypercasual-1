@@ -2,21 +2,24 @@
 using System;
 public class StartState: IState
 {
-    private UIController _uiController;
+    private ButtonController _buttonController;
     private ScoreController _scoreController;
-    public StartState(UIController uiController, ScoreController scoreController)
+    private CameraController _cameraController;
+    public StartState(ButtonController buttonController, ScoreController scoreController, CameraController cameraController)
     {
-        _uiController = uiController;
+        _buttonController = buttonController;
         _scoreController = scoreController;
+        _cameraController = cameraController;
     }
     public void Enter()
     {
-        _uiController.ButtonChangeColor(1);
+        _buttonController.ButtonChangeColor(1);
         _scoreController.TriggerScoreUpdate();
+        _cameraController.SetCameraVelocity();
     }
 
     public void Exit()
     {
-        
+        _scoreController.ResetScore();
     }
 }

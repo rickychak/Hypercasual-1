@@ -4,10 +4,10 @@ using UnityEngine;
 using System;
 using UnityEditor;
 
-public class UIController : MonoBehaviour
+public class ButtonController : MonoBehaviour
 {
 
-    [SerializeField] private UIModel _uiModel;
+    [SerializeField] private ButtonModel buttonModel;
     public event Action buttonClickEvent;
     //TODO: Start Game or Reload Game based on UIState
     public void ToggleButton()
@@ -17,10 +17,10 @@ public class UIController : MonoBehaviour
 
     public void ButtonChangeColor(int stateIndex)
     {
-        _uiModel.GetImage().color = GetColor(stateIndex);
+        buttonModel.GetImage().color = GetColor(stateIndex);
     }
     public Color GetColor(int index)
     {
-        return _uiModel.GetPallete()[index];
+        return buttonModel.GetPallete()[index];
     }
 }

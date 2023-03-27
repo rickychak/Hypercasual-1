@@ -2,17 +2,20 @@
 
 public class EndState: IState
 {
-    private UIController _uiController;
+    private ButtonController _buttonController;
     private ScoreController _scoreController;
-    public EndState(UIController uiController, ScoreController scoreController)
+    private CameraController _cameraController;
+    public EndState(ButtonController buttonController, ScoreController scoreController, CameraController cameraController)
     {
-        _uiController = uiController;
+        _buttonController = buttonController;
         _scoreController = scoreController;
+        _cameraController = cameraController;
     }
     public void Enter()
     {
-        _uiController.ButtonChangeColor(0);
+        _buttonController.ButtonChangeColor(0);
         _scoreController.TriggerScoreUpdate();
+        _cameraController.ResetCameraVelocity();
     }
 
     public void Exit()

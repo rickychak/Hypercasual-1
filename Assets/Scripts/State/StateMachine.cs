@@ -11,26 +11,25 @@ public enum StateEnumForDict
 public class StateMachine: MonoBehaviour
 {
     private IState _currentState;
-    [SerializeField] private UIController _uiController;
+    [SerializeField] private ButtonController buttonController;
     [SerializeField] private ScoreController _scoreController;
+    [SerializeField] private CameraController _cameraController;
     private Dictionary<StateEnumForDict,IState> _stateDict = new();
     private void Start()
     {
-        _stateDict.Add(StateEnumForDict.StartState, new StartState(_uiController, _scoreController));
-        _stateDict.Add(StateEnumForDict.EndState, new EndState(_uiController, _scoreController));
+        _stateDict.Add(StateEnumForDict.StartState, new StartState(buttonController, _scoreController, _cameraController));
+        _stateDict.Add(StateEnumForDict.EndState, new EndState(buttonController, _scoreController, _cameraController));
         _currentState = _stateDict[StateEnumForDict.EndState];
         _currentState.Enter();
-        
-
     }
 
     private void OnEnable()
     {
-        _uiController.buttonClickEvent += ChangeState;
+        buttonController.buttonClickEvent += ChangeState;
     }
     private void OnDisable()
     {
-        _uiController.buttonClickEvent -= ChangeState;
+        buttonController.buttonClickEvent -= ChangeState;
     }
 
     private void ChangeState()

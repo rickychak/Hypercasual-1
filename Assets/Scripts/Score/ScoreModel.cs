@@ -10,6 +10,11 @@ public class ScoreModel: MonoBehaviour
     {
         return _scoreTrigger;
     }
+
+    public void ResetScore()
+    {
+        _score = 0;
+    }
     
     public void TriggerScoreUpdate()
     {

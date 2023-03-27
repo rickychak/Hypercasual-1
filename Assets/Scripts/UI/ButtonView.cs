@@ -2,10 +2,10 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIView : MonoBehaviour
+public class ButtonView : MonoBehaviour
 {
     private Button _button;
-    [SerializeField] private UIController _uiController;
+    [SerializeField] private ButtonController buttonController;
 
     
     // Start is called before the first frame update
@@ -17,7 +17,7 @@ public class UIView : MonoBehaviour
     
     private void ButtonChangeColorOnClick()
     {
-        _uiController.ToggleButton();
+        buttonController.ToggleButton();
     }
 
     

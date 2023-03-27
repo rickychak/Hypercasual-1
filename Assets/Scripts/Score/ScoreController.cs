@@ -10,6 +10,11 @@ public class ScoreController: MonoBehaviour
         return _scoreModel.GetScore();
     }
 
+    public void ResetScore()
+    {
+        _scoreModel.ResetScore();
+    }
+
     public void TriggerScoreUpdate()
     {
         _scoreModel.TriggerScoreUpdate();
