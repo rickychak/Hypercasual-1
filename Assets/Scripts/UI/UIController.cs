@@ -8,20 +8,19 @@ public class UIController : MonoBehaviour
 {
 
     [SerializeField] private UIModel _uiModel;
-    [SerializeField] private StateMachine _stateMachine;
-
+    public event Action buttonClickEvent;
     //TODO: Start Game or Reload Game based on UIState
     public void ToggleButton()
     {
-        _stateMachine.ChangeState();
+        buttonClickEvent?.Invoke();
     }
 
+    public void ButtonChangeColor(int stateIndex)
+    {
+        _uiModel.GetImage().color = GetColor(stateIndex);
+    }
     public Color GetColor(int index)
     {
         return _uiModel.GetPallete()[index];
-    }
-    public IState GetState()
-    {
-        return _stateMachine.GetState();
     }
 }

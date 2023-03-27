@@ -6,7 +6,7 @@ public class GridModel : MonoBehaviour
     [SerializeField]private bool[] _grid = new bool[2392];
 
 
-    private void Start()
+    public void GridInitialisation()
     {
         GridUpdate(false);
     }

@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -27,7 +24,7 @@ public class GridView: MonoBehaviour
     }
 
     
-    private void CellTurnBlackOnClick(Vector3 touchPosition)
+    public void CellTurnBlackOnClick(Vector3 touchPosition)
     {
         var cellPosition = _tilemap.WorldToCell(touchPosition);
         _tilemap.SetTileFlags(cellPosition, TileFlags.None);

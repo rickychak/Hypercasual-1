@@ -1,17 +1,17 @@
-using System;
 using UnityEngine;
 
 public class GridController : MonoBehaviour
 {
-    private GridModel _gridModel;
-    
-    
+    [SerializeField]private GridModel _gridModel;
+    private GridView _gridView;
+
+
     private void Start()
     {
-        _gridModel = transform.GetComponent<GridModel>();
+        _gridModel.GridInitialisation();
     }
-
-    public int CellPositionToGridIndex(Vector3Int cellPosition)
+    
+    private int CellPositionToGridIndex(Vector3Int cellPosition)
     {
         var gridResolution = _gridModel.GetCellResolution();
         var cleansedCellPosition = new Vector2(cellPosition.x + gridResolution.x/2,
