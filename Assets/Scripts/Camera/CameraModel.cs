@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CameraModel : MonoBehaviour
 {
-    private float _cameraMoveVel = 1.0f;
+    private float _cameraMoveVel = 5.0f;
     private Vector2 _cameraMoveForce = Vector2.right;
     private bool _cameraTrigger = false;
 
