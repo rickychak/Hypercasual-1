@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] private EventManager _eventManager;
     [SerializeField] private GameObject _buttonGameObject;
     [SerializeField] private TextMeshProUGUI _text;
     
-    public event Action GUIButtonClickSignal;
+    
     private Color[] _colorPallete = { new Color(0.43f, 1f, 0.38f), new Color(1f, 0.5f, 0.46f) };
 
     private Button _button;
@@ -22,9 +23,9 @@ public class UIManager : MonoBehaviour
         _button.onClick.AddListener(DispatchGUIButtonSignal);    
     }
 
-    void DispatchGUIButtonSignal()
+    private void DispatchGUIButtonSignal()
     {
-        GUIButtonClickSignal?.Invoke();
+        _eventManager.DispatchGUIButtonSignal();
     }
 
     public void GUIButtonChangeColorOnClick(int index)

@@ -1,17 +1,32 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-public class StateMachine: MonoBehaviour
+public class StateMachine : MonoBehaviour
 {
     private IState _currentState;
-    [SerializeField] private StateInitializer _stateInitializer;
-    private void Start()
+    private Dictionary<StateEnum, IState> _stateDict = new();
+
+    public void Initialize(Dictionary<StateEnum, IState> stateDict)
     {
-        var stateDict =  _stateInitializer.StateInitialization();
-        stateDict[StateEnum.DrawState].Init(stateDict);
-        stateDict[StateEnum.PlayState].Init(stateDict);
-        
-        _currentState = stateDict[StateEnum.DrawState];
+        _stateDict = stateDict;
+        _currentState = _stateDict[StateEnum.DrawState];
         _currentState.Enter();
     }
 
+    public void ChangeState()
+    {
+        _currentState.Exit();
+        switch (_currentState)
+        {
+            case DrawState:
+                _currentState = _stateDict[StateEnum.PlayState];
+                break;
+            case PlayState:
+                _currentState = _stateDict[StateEnum.DrawState];
+                break;
+            default:
+                break;
+        }
+        _currentState.Enter();
+    }
 }

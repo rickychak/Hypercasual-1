@@ -474,6 +474,7 @@ GameObject:
   - component: {fileID: 704679154}
   - component: {fileID: 704679159}
   - component: {fileID: 704679158}
+  - component: {fileID: 704679160}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -558,7 +559,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cacb36461ed4af0931720d5c4bb69ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stateInitializer: {fileID: 704679159}
 --- !u!114 &704679157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -599,8 +599,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97185461629d4b98bedddb3abbfbcfd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stateMachine: {fileID: 704679154}
   _uiManager: {fileID: 704679158}
   _uiCameraController: {fileID: 704679157}
+  _eventManager: {fileID: 704679160}
+--- !u!114 &704679160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704679148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baff18d6582abe34781b9b5dbe9475a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1082560582
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,22 +11,29 @@ public enum StateEnum
 }
 
 
-public class StateInitializer: MonoBehaviour, IStateInitializer
+public class StateInitializer : MonoBehaviour
 {
+    [SerializeField] private StateMachine _stateMachine;
     [SerializeField] private UIManager _uiManager;
     [SerializeField] private CameraController _uiCameraController;
+    [SerializeField] private EventManager _eventManager;
+
     private Dictionary<StateEnum, IState> _stateDict = new();
 
-    public Dictionary<StateEnum, IState> StateInitialization()
+    private void Start()
     {
+        _eventManager.GUIButtonClickSignal += OnGUIButtonClick;
         _stateDict.Add(StateEnum.DrawState, new DrawState(_uiManager, _uiCameraController));
         _stateDict.Add(StateEnum.PlayState, new PlayState(_uiManager, _uiCameraController));
-        return _stateDict;
+        _stateMachine.Initialize(_stateDict);
     }
-    
-    
 
+    private void OnGUIButtonClick()
+    {
+        _stateMachine.ChangeState();
+    }
 }
+
 
 public interface IStateInitializer
 {
