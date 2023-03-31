@@ -5,13 +5,13 @@ using System.Collections.Generic;
 public class PlayState : IState
 {
     private UIManager _uiManager;
-    private CameraController _cameraController;
+    private GameplayController _gameplayController;
     private IState _nextState;
 
-    public PlayState(UIManager uiManager, CameraController cameraController)
+    public PlayState(UIManager uiManager, GameplayController gameplayController)
     {
         _uiManager = uiManager;
-        _cameraController = cameraController;
+        _gameplayController = gameplayController;
     }
 
     public void Enter()

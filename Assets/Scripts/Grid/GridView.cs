@@ -4,7 +4,7 @@ using UnityEngine.Tilemaps;
 public class GridView: MonoBehaviour
 {
     //private GridController _gridController;
-    [SerializeField]private InputController _inputController;
+    [SerializeField]private GameplayController _gameplayController;
     [SerializeField]private Tilemap _tilemap;
     private GridController _gridController;
 
@@ -15,12 +15,12 @@ public class GridView: MonoBehaviour
 
     private void OnEnable()
     {
-        _inputController.InputEvent += CellTurnBlackOnClick;
+        _gameplayController.InputEvent += CellTurnBlackOnClick;
     }
     
     private void OnDisable()
     {
-        _inputController.InputEvent -= CellTurnBlackOnClick;
+        _gameplayController.InputEvent -= CellTurnBlackOnClick;
     }
 
     

@@ -469,12 +469,11 @@ GameObject:
   - component: {fileID: 704679151}
   - component: {fileID: 704679150}
   - component: {fileID: 704679149}
-  - component: {fileID: 704679153}
-  - component: {fileID: 704679157}
   - component: {fileID: 704679154}
   - component: {fileID: 704679159}
   - component: {fileID: 704679158}
   - component: {fileID: 704679160}
+  - component: {fileID: 704679161}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -532,21 +531,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &704679153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 704679148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94d915c829059e44287867f8ae9fcac6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!114 &704679154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,20 +543,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cacb36461ed4af0931720d5c4bb69ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &704679157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 704679148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e2cf62738984e04e8882dbc7c021fc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cameraModel: {fileID: 2089373298}
-  _camera: {fileID: 519420028}
 --- !u!114 &704679158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -585,6 +555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f950751ad253d0046a053911245cd8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _eventManager: {fileID: 704679160}
   _buttonGameObject: {fileID: 1903593275}
   _text: {fileID: 681144937}
 --- !u!114 &704679159
@@ -601,7 +572,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateMachine: {fileID: 704679154}
   _uiManager: {fileID: 704679158}
-  _uiCameraController: {fileID: 704679157}
+  _gameplayController: {fileID: 704679161}
   _eventManager: {fileID: 704679160}
 --- !u!114 &704679160
 MonoBehaviour:
@@ -615,6 +586,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baff18d6582abe34781b9b5dbe9475a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &704679161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704679148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 451d18fe77d618340ba54ff558f11afa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gridModel: {fileID: 2089373295}
+  _cameraModel: {fileID: 2089373298}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &1082560582
 GameObject:
   m_ObjectHideFlags: 0
@@ -1005,7 +993,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30b548f7044896b4d8f5c57dd0474d03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inputController: {fileID: 704679153}
+  _gameplayController: {fileID: 704679161}
   _tilemap: {fileID: 264241695}
 --- !u!114 &1968360053
 MonoBehaviour:

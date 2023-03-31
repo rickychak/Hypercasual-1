@@ -15,7 +15,7 @@ public class StateInitializer : MonoBehaviour
 {
     [SerializeField] private StateMachine _stateMachine;
     [SerializeField] private UIManager _uiManager;
-    [SerializeField] private CameraController _uiCameraController;
+    [SerializeField] private GameplayController _gameplayController;
     [SerializeField] private EventManager _eventManager;
 
     private Dictionary<StateEnum, IState> _stateDict = new();
@@ -23,8 +23,8 @@ public class StateInitializer : MonoBehaviour
     private void Start()
     {
         _eventManager.GUIButtonClickSignal += OnGUIButtonClick;
-        _stateDict.Add(StateEnum.DrawState, new DrawState(_uiManager, _uiCameraController));
-        _stateDict.Add(StateEnum.PlayState, new PlayState(_uiManager, _uiCameraController));
+        _stateDict.Add(StateEnum.DrawState, new DrawState(_uiManager, _gameplayController));
+        _stateDict.Add(StateEnum.PlayState, new PlayState(_uiManager, _gameplayController));
         _stateMachine.Initialize(_stateDict);
     }
 

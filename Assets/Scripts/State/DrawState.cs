@@ -4,13 +4,13 @@ using UnityEngine;
 public class DrawState : IState
 {
     private UIManager _uiManager;
-    private CameraController _cameraController;
+    private GameplayController _gameplayController;
     private IState _nextState;
 
-    public DrawState(UIManager uiManager, CameraController cameraController)
+    public DrawState(UIManager uiManager, GameplayController gameplayController)
     {
         _uiManager = uiManager;
-        _cameraController = cameraController;
+        _gameplayController = gameplayController;
     }
 
     public void Enter()
