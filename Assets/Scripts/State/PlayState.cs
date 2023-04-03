@@ -18,6 +18,9 @@ public class PlayState : IState
     {
         _uiManager.GUIButtonChangeColorOnClick(1);
         _uiManager.ToggleGUIScoreCounting();
+        _uiManager.ToggleBackgroundScrolling();
+        _gameplayController.ToggleMapMovement();
+        //_gameplayController.SetCameraVelocity();
     }
 
     public void Exit()

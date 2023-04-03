@@ -6,21 +6,23 @@ public class GameplayController : MonoBehaviour
 {
     [SerializeField]private GridModel _gridModel;
     private GridView _gridView;
+    [SerializeField] private TerrainController _terrainController;
     [SerializeField] private CameraModel _cameraModel;
     private Camera _mainCamera;
     private Vector3 _touchPosition;
     private RaycastHit2D _raycastHit2D;
-    
+    private Rigidbody2D _cameraRigidBody2D;
     private Vector3Int _cellPosition;
     public event Action<Vector3> InputEvent;
     
     [SerializeField] private LayerMask _layerMask;
 
 
-    private void Start()
+    private void Awake()
     {
         _gridModel.GridInitialisation();
         _mainCamera = Camera.main;
+        _cameraRigidBody2D  = _mainCamera.gameObject.transform.GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -28,13 +30,9 @@ public class GameplayController : MonoBehaviour
         SetInputModelCellPosition();
     }
 
-    public void SetCameraVelocity() 
+    public void ToggleMapMovement()
     {
-        _mainCamera.transform.GetComponent<Rigidbody2D>().AddForce(_cameraModel.GetCameraMovementVelocity());
-    }
-    public void ResetCameraVelocity()
-    {
-        _mainCamera.transform.GetComponent<Rigidbody2D>().AddForce(0*_cameraModel.GetCameraMovementVelocity());
+        _terrainController.ToggleMapSimulation();
     }
 
     private void SetInputModelCellPosition()
@@ -42,7 +40,6 @@ public class GameplayController : MonoBehaviour
         if (Input.touchCount <= 0) return;
         _touchPosition = Input.GetTouch(0).position;
         _raycastHit2D = Physics2D.Raycast(_mainCamera.ScreenToWorldPoint(_touchPosition), Vector3.back, 5, _layerMask);
-        //if (_raycastHit2D.collider == null) return;
         if (ReferenceEquals(_raycastHit2D.collider, null)) return;
         InputEvent?.Invoke(_mainCamera.ScreenToWorldPoint(_touchPosition));
     }

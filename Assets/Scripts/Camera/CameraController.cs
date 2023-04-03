@@ -23,8 +23,8 @@ public class CameraController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        _camera.gameObject.transform.position += Vector3.right*0.001f;
     }
 }

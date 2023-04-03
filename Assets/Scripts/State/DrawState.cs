@@ -18,6 +18,9 @@ public class DrawState : IState
         _uiManager.GUIButtonChangeColorOnClick(0);
         _uiManager.ToggleGUIScoreCounting();
         _uiManager.ResetGUIScore();
+        _uiManager.ToggleBackgroundScrolling();
+        _gameplayController.ToggleMapMovement();
+        //_gameplayController.ResetCameraVelocity();
         
     }
 
