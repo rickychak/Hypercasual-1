@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TerrainController:MonoBehaviour
 {
     [SerializeField] private TerrainModel _terrainModel;
-    [SerializeField] private GameObject backgroundParent;
+    [SerializeField] private GameObject _leftBound;
     [SerializeField] private GameObject mapParent;
 
     private Queue<GameObject> _mapsQueue = new();
+    private GameObject _lastQueueObject;
     private Rigidbody2D[] _mapsRigidbody2DsList;
     private List<GameObject> _backgroundsList;
     private List<GameObject> _mapsList;
@@ -18,10 +20,24 @@ public class TerrainController:MonoBehaviour
         _mapsList = _terrainModel.GetMapGameObjects();
         foreach (var mapGO in _mapsList)
         {
+            Debug.Log(mapGO);
             _mapsQueue.Enqueue(mapGO);
+            _lastQueueObject = mapGO;
         }
+        Debug.Log(_lastQueueObject.name);
         _mapsRigidbody2DsList = mapParent.GetComponentsInChildren<Rigidbody2D>();
         SetMapVelocity();
+    }
+
+    private void Update()
+    {
+        //Debug.Log(_mapsQueue.Peek());
+        if (_mapsQueue.Peek().transform.position.x+0.5f > _leftBound.transform.position.x) return;
+        var outBoundMap = _mapsQueue.Dequeue();
+        outBoundMap.transform.position = _lastQueueObject.transform.position + Vector3.right*8;
+        _lastQueueObject = outBoundMap;
+        _mapsQueue.Enqueue(_lastQueueObject);
+
     }
 
     private void SetMapVelocity()
