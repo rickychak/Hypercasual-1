@@ -863,6 +863,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gridModel: {fileID: 2089373295}
   _terrainController: {fileID: 704679162}
+  _wheelFactory: {fileID: 704679163}
   _cameraModel: {fileID: 2089373298}
   _layerMask:
     serializedVersion: 2
