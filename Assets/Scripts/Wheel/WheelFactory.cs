@@ -19,12 +19,12 @@ public class WheelFactory : MonoBehaviour
         {
             if (_gridModel.GetCellByIndex(i))
             {
-                var row = i / _gridModel.GetCellResolution().x;
-                var col = i % _gridModel.GetCellResolution().y;
+                var row = (int)Math.Floor(i / _gridModel.GetCellResolution().x);
+                var col = i % _gridModel.GetCellResolution().x;
                 minRow = Math.Min(minRow, row);
-                maxRow = Math.Min(maxRow, row);
+                maxRow = Math.Max(maxRow, row);
                 minCol = Math.Min(minCol, col);
-                maxCol = Math.Min(maxCol, col);
+                maxCol = Math.Max(maxCol, col);
             }
         }
 
@@ -33,9 +33,10 @@ public class WheelFactory : MonoBehaviour
         {
             minGrid.Add(false);
         }
-        for (int i = (int)minRow; i < maxRow + 1; i++)
+        //map back to original
+        for (int i = (int)minRow; i < maxRow; i++)
         {
-            for (int j = (int)minCol; j < maxCol + 1; j++)
+            for (int j = (int)minCol; j < maxCol; j++)
             {
                 if (_gridModel.GetCellByIndex(i * j))
                 {
