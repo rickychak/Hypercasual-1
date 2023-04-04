@@ -1,14 +1,17 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class GridController : MonoBehaviour
 {
     [SerializeField]private GridModel _gridModel;
     private GridView _gridView;
+    [SerializeField] private Tilemap tilemap;
 
 
-    private void Start()
+    private void Awake()
     {
-        _gridModel.GridInitialisation();
+        BoundsInt bounds = tilemap.cellBounds;
+        _gridModel.InitialiseGrid(bounds.size.x - 1 ,bounds.size.y);
     }
     
     private int CellPositionToGridIndex(Vector3Int cellPosition)
@@ -22,6 +25,7 @@ public class GridController : MonoBehaviour
     }
     public void ToggleCell(Vector3Int cellPosition)
     {
+        
         var cellIndex = CellPositionToGridIndex(cellPosition);
         if (_gridModel.GetCellByIndex(cellIndex)) return;
         _gridModel.ToggleCell(cellIndex, true);

@@ -7,6 +7,7 @@ public class GameplayController : MonoBehaviour
     [SerializeField]private GridModel _gridModel;
     private GridView _gridView;
     [SerializeField] private TerrainController _terrainController;
+    [SerializeField] private WheelFactory _wheelFactory;
     [SerializeField] private CameraModel _cameraModel;
     private Camera _mainCamera;
     private Vector3 _touchPosition;
@@ -20,7 +21,6 @@ public class GameplayController : MonoBehaviour
 
     private void Awake()
     {
-        _gridModel.GridInitialisation();
         _mainCamera = Camera.main;
         _cameraRigidBody2D  = _mainCamera.gameObject.transform.GetComponent<Rigidbody2D>();
     }
@@ -59,5 +59,10 @@ public class GameplayController : MonoBehaviour
         var cellIndex = CellPositionToGridIndex(cellPosition);
         if (_gridModel.GetCellByIndex(cellIndex)) return;
         _gridModel.ToggleCell(cellIndex, true);
+    }
+
+    public void CreateWheel()
+    {
+        _wheelFactory.FindGridMinResolution();
     }
 }

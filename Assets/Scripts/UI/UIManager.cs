@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,31 +9,31 @@ public class UIManager : MonoBehaviour
     [SerializeField] private EventManager _eventManager;
     [SerializeField] private GameObject _buttonGameObject;
     [SerializeField] private TextMeshProUGUI _text;
-    [SerializeField] private GameObject _background;
+    [SerializeField] private GameObject backgroundParent;
+    [SerializeField] private GameObject leftBound;
     
-    private bool _isBackgroundScrolling = true;
     private Vector2 _backgroundScrollingSpeed = Vector2.left;
+    private GameObject _lastQueueObject;
+    private List<GameObject> _backgroundsList;
+    private Queue<GameObject> _backgroundsQueue = new();
+    private Rigidbody2D[] _backgroundRigidbody2DsArray; 
     
-    private Color[] _colorPallete = { new Color(0.43f, 1f, 0.38f), new Color(1f, 0.5f, 0.46f) };
-    
+    private readonly Color[] _colourpalette = { new Color(0.43f, 1f, 0.38f), new Color(1f, 0.5f, 0.46f) };
     private Button _button;
     private Image _image;
+    
+    
     private float _score;
     private bool _isScoreCounting = true;
     void Awake()
     {
-        _background.GetComponentInChildren<Rigidbody2D>().velocity = _backgroundScrollingSpeed;
+        BackGroundGameObjectsSetup();
         _button = _buttonGameObject.transform.GetComponent<Button>();
         _image = _buttonGameObject.transform.GetComponent<Image>();
         _button.onClick.AddListener(DispatchGUIButtonSignal);    
     }
-
-    public void ToggleBackgroundScrolling()
-    {
-        _isBackgroundScrolling = !_isBackgroundScrolling;
-        _background.GetComponentInChildren<Rigidbody2D>().simulated = _isBackgroundScrolling;
-    }
     
+    #region Button
     private void DispatchGUIButtonSignal()
     {
         _eventManager.DispatchGUIButtonSignal();
@@ -40,9 +41,11 @@ public class UIManager : MonoBehaviour
 
     public void GUIButtonChangeColorOnClick(int index)
     {
-        _image.color = _colorPallete[index];
+        _image.color = _colourpalette[index];
     }
+    #endregion
 
+    #region Score 
     public void ToggleGUIScoreCounting()
     {
         _isScoreCounting = !_isScoreCounting;
@@ -57,11 +60,62 @@ public class UIManager : MonoBehaviour
     {
         _text.text = _score.ToString("0.00");
     }
+    #endregion
+
+    #region Background
+    private void BackGroundGameObjectsSetup()
+    {
+        _backgroundsList = GetBackgroundGameObjects();
+        _backgroundRigidbody2DsArray = backgroundParent.GetComponentsInChildren<Rigidbody2D>();
+        foreach (var mapGo in _backgroundsList)
+        {
+            _backgroundsQueue.Enqueue(mapGo);
+            _lastQueueObject = mapGo;
+        }
+
+        foreach (var bgrb2 in _backgroundRigidbody2DsArray)
+        {
+            bgrb2.velocity = _backgroundScrollingSpeed;
+        }
+    }
+
+    private List<GameObject> GetBackgroundGameObjects()
+    {
+        var backgroundArray = new List<GameObject>();
+        for (int i = 0; i < backgroundParent.transform.childCount; i++)
+        {
+            backgroundArray.Add(backgroundParent.transform.GetChild(i).gameObject);
+        }
+
+        return backgroundArray;
+    }
+    public void ToggleBackgroundScrolling()
+    {
+        foreach (var bgrb2 in _backgroundRigidbody2DsArray)
+        {
+            bgrb2.simulated = !bgrb2.simulated;
+        }
+    }
+
+    private void BackgroundReposition()
+    {
+        var outBoundBackground = _backgroundsQueue.Dequeue();
+        outBoundBackground.transform.position = _lastQueueObject.transform.position + Vector3.right * 8.0f;
+        _lastQueueObject = outBoundBackground;
+        _backgroundsQueue.Enqueue(_lastQueueObject);
+    }
+    
+    #endregion
+    
 
     private void Update()
     {
+        if(_backgroundsQueue.Peek().transform.position.x+0.5f < leftBound.transform.position.x) BackgroundReposition();
         if (!_isScoreCounting) return;
         _score += Time.deltaTime;
         SetGUIScoreText();
+        
+        
+        
     }
 }

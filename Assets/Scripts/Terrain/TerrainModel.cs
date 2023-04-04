@@ -4,27 +4,28 @@ using UnityEngine;
 
 public class TerrainModel: MonoBehaviour
 {
-    public GameObject backgroundParent { get; set; }
     public GameObject mapParent { get; set; }
 
     private Vector2 terrainVelocity = Vector2.left;
     private float terrainVelocityMultiplier = 1.0f;
+    private float terrainRepositionThreshold = 0.5f;
+    private float terrainSize = 8.0f;
 
     public Vector2 GetTerrainVelocity()
     {
         return terrainVelocity * terrainVelocityMultiplier;
     }
 
-    public List<GameObject> GetBackgroundGameObjects()
+    public float GetRepositionThreshold()
     {
-        var backgroundArray = new List<GameObject>();
-        for (int i = 0; i < backgroundParent.transform.childCount; i++)
-        {
-            backgroundArray.Add(backgroundParent.transform.GetChild(i).gameObject);
-        }
-
-        return backgroundArray;
+        return terrainRepositionThreshold;
     }
+    
+    public float GetTerrainSize()
+    {
+        return terrainSize;
+    }
+
     
     public List<GameObject> GetMapGameObjects()
     {

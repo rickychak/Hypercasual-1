@@ -7,6 +7,7 @@ public class PlayState : IState
     private UIManager _uiManager;
     private GameplayController _gameplayController;
     private IState _nextState;
+    
 
     public PlayState(UIManager uiManager, GameplayController gameplayController)
     {
@@ -20,7 +21,7 @@ public class PlayState : IState
         _uiManager.ToggleGUIScoreCounting();
         _uiManager.ToggleBackgroundScrolling();
         _gameplayController.ToggleMapMovement();
-        //_gameplayController.SetCameraVelocity();
+        _gameplayController.CreateWheel();
     }
 
     public void Exit()

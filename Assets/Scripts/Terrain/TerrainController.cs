@@ -20,24 +20,21 @@ public class TerrainController:MonoBehaviour
         _mapsList = _terrainModel.GetMapGameObjects();
         foreach (var mapGO in _mapsList)
         {
-            Debug.Log(mapGO);
             _mapsQueue.Enqueue(mapGO);
             _lastQueueObject = mapGO;
         }
-        Debug.Log(_lastQueueObject.name);
         _mapsRigidbody2DsList = mapParent.GetComponentsInChildren<Rigidbody2D>();
+        
         SetMapVelocity();
     }
 
     private void Update()
     {
-        //Debug.Log(_mapsQueue.Peek());
-        if (_mapsQueue.Peek().transform.position.x+0.5f > _leftBound.transform.position.x) return;
+        if (_mapsQueue.Peek().transform.position.x+_terrainModel.GetRepositionThreshold() > _leftBound.transform.position.x) return;
         var outBoundMap = _mapsQueue.Dequeue();
-        outBoundMap.transform.position = _lastQueueObject.transform.position + Vector3.right*8;
+        outBoundMap.transform.position = _lastQueueObject.transform.position + Vector3.right*_terrainModel.GetTerrainSize();
         _lastQueueObject = outBoundMap;
         _mapsQueue.Enqueue(_lastQueueObject);
-
     }
 
     private void SetMapVelocity()

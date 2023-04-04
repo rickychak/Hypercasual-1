@@ -20,7 +20,7 @@ public class StateInitializer : MonoBehaviour
 
     private Dictionary<StateEnum, IState> _stateDict = new();
 
-    private void Awake()
+    private void Start()
     {
         _stateMachine = new StateMachine();
         _eventManager.GUIButtonClickSignal += OnGUIButtonClick;

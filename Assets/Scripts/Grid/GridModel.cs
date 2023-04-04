@@ -1,19 +1,29 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GridModel : MonoBehaviour
 {
-    private Vector2 _gridResolution = new Vector2(46, 52);
-    [SerializeField]private bool[] _grid = new bool[2392];
+    private Vector2 _gridResolution;
+    [SerializeField] private List<bool> _grid = new();
 
 
-    public void GridInitialisation()
+    public void InitialiseGrid(int gridRowCount, int gridColumnCount)
     {
-        GridUpdate(false);
+        _gridResolution = new Vector2(gridRowCount, gridColumnCount);
+        for (int i = 0; i < (gridRowCount * gridColumnCount); i++)
+        {
+            _grid.Add(false);
+        }
     }
 
     public Vector2 GetCellResolution()
     {
         return _gridResolution;
+    }
+
+    public float GetGridSize()
+    {
+        return _grid.Count;
     }
     public bool GetCellByIndex(int index)
     {
@@ -28,7 +38,7 @@ public class GridModel : MonoBehaviour
 
     public void GridUpdate(bool boo)
     {
-        for (int i = 0; i < _grid.Length; i++)
+        for (int i = 0; i < _grid.Count; i++)
         {
             _grid[i] = boo;
         }

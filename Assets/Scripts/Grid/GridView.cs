@@ -29,8 +29,6 @@ public class GridView: MonoBehaviour
         var cellPosition = _tilemap.WorldToCell(touchPosition);
         _tilemap.SetTileFlags(cellPosition, TileFlags.None);
         _tilemap.SetColor(cellPosition, Color.black);
-        //Debug.Log(cellPosition);
-        // _gridController.CellPositionToGridIndex(cellPosition);
         _gridController.ToggleCell(cellPosition);
     }
 
