@@ -5,14 +5,13 @@ using UnityEngine;
 public class GameplayController : MonoBehaviour
 {
     [SerializeField]private GridModel _gridModel;
-    private GridView _gridView;
     [SerializeField] private TerrainController _terrainController;
     [SerializeField] private WheelFactory _wheelFactory;
-    [SerializeField] private CameraModel _cameraModel;
+    
+    
     private Camera _mainCamera;
     private Vector3 _touchPosition;
     private RaycastHit2D _raycastHit2D;
-    private Rigidbody2D _cameraRigidBody2D;
     private Vector3Int _cellPosition;
     public event Action<Vector3> InputEvent;
     
@@ -22,7 +21,6 @@ public class GameplayController : MonoBehaviour
     private void Awake()
     {
         _mainCamera = Camera.main;
-        _cameraRigidBody2D  = _mainCamera.gameObject.transform.GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -63,6 +61,6 @@ public class GameplayController : MonoBehaviour
 
     public void CreateWheel()
     {
-        _wheelFactory.FindGridMinResolution();
+        _wheelFactory.CreateWheel();
     }
 }
