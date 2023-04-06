@@ -6,7 +6,7 @@ public class GameplayController : MonoBehaviour
 {
     [SerializeField]private GridModel _gridModel;
     [SerializeField] private TerrainController _terrainController;
-    [SerializeField] private WheelFactory _wheelFactory;
+    [SerializeField] private VehicleFactory _vehicleFactory;
     
     
     private Camera _mainCamera;
@@ -59,8 +59,8 @@ public class GameplayController : MonoBehaviour
         _gridModel.ToggleCell(cellIndex, true);
     }
 
-    public void CreateWheel()
+    public void CreateVehicle()
     {
-        _wheelFactory.CreateWheel();
+        _vehicleFactory.CreateVehicle();
     }
 }

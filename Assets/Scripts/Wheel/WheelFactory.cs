@@ -1,26 +1,34 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Vehicle;
+using UnityEngine.UI;
 
+
+public struct Wheel
+{
+    public List<bool> wheelGrid;
+    public GameObject wheelPrefab;
+    public GameObject wheelCellPrefab;
+}
 public class WheelFactory : MonoBehaviour
 {
+    [SerializeField] private WheelModel wheelModel;
     [SerializeField] private GridModel _gridModel;
-    [SerializeField] private WheelModel _wheelModel;
+    [SerializeField] private GameObject _wheelPrefab;
+    [SerializeField] private GameObject _wheelCellPrefab;
     private Vector2 minGridResolution;
-    private List<bool> minGrid = new();
+    private Wheel wheel;
     private int _gridSizeX;
     private int _gridSizeY;
-    private int _leftTopCoordinate;
-    private int _rightBottomCoordinate;
-    private int _leftBottomCoordinate;
-    private int _rightTopCoordinate;
 
     private void InitializeWheelParameters()
     {
+        wheel = new Wheel();
         _gridSizeX = (int)_gridModel.GetCellResolution().x;
         _gridSizeY = (int)_gridModel.GetCellResolution().y;
+        wheel.wheelGrid = new List<bool>();
+        wheel.wheelPrefab = _wheelPrefab; 
+        wheel.wheelCellPrefab = _wheelCellPrefab; 
     }
     private void CreateWheelGrid()
     {
@@ -42,13 +50,13 @@ public class WheelFactory : MonoBehaviour
         
         for (int i = 0; i < (int)minGridResolution.x * (int)minGridResolution.y; i++)
         {
-            minGrid.Add(false);
+            wheel.wheelGrid.Add(false);
         }
 
-        _leftTopCoordinate = minRow * _gridSizeX + minCol;
-        _rightBottomCoordinate = maxRow * _gridSizeX + minCol;
-        _leftBottomCoordinate = minRow * _gridSizeX + maxCol;
-        _rightTopCoordinate = maxRow * _gridSizeX + maxCol;
+        var _leftTopCoordinate = minRow * _gridSizeX + minCol;
+        var _rightBottomCoordinate = maxRow * _gridSizeX + minCol;
+        var _leftBottomCoordinate = minRow * _gridSizeX + maxCol;
+        var _rightTopCoordinate = maxRow * _gridSizeX + maxCol;
 
         for (int i = 0; i < minGridResolution.x; i++)
         {
@@ -56,16 +64,24 @@ public class WheelFactory : MonoBehaviour
             {
                 var index = (int) (i*minGridResolution.y + j);
                 var subIndex = (int) ((_leftTopCoordinate + j) + _gridSizeX * i);
-                minGrid[index] = _gridModel.GetCellByIndex(subIndex);
+                wheel.wheelGrid[index] = _gridModel.GetCellByIndex(subIndex);
             }
         }
     }
 
-    public void CreateWheel()
+    public Wheel CreateWheel()
     {
         InitializeWheelParameters();
         CreateWheelGrid();
+        wheel.wheelPrefab.GetComponent<GridLayoutGroup>().constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+        wheel.wheelPrefab.GetComponent<GridLayoutGroup>().constraintCount = (int)minGridResolution.y;
+        wheel.wheelPrefab.GetComponent<WheelJoint2D>().useMotor = false;
+        // var jointMotor2D = new JointMotor2D
+        // {
+        //     motorSpeed = wheelModel.GetMotorParams().x,
+        //     maxMotorTorque = wheelModel.GetMotorParams().y
+        // };
+        // wheel.wheelPrefab.GetComponent<WheelJoint2D>().motor = jointMotor2D;
+        return wheel;
     }
-
-    
 }

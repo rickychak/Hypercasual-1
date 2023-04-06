@@ -21,7 +21,7 @@ public class PlayState : IState
         _uiManager.ToggleGUIScoreCounting();
         _uiManager.ToggleBackgroundScrolling();
         _gameplayController.ToggleMapMovement();
-        _gameplayController.CreateWheel();
+        _gameplayController.CreateVehicle();
     }
 
     public void Exit()
