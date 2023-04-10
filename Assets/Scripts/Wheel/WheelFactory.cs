@@ -16,19 +16,19 @@ public class WheelFactory : MonoBehaviour
     [SerializeField] private GridModel _gridModel;
     [SerializeField] private GameObject _wheelPrefab;
     [SerializeField] private GameObject _wheelCellPrefab;
-    private Vector2 minGridResolution;
-    private Wheel wheel;
+    private Vector2 _minGridResolution;
+    private Wheel _wheel;
     private int _gridSizeX;
     private int _gridSizeY;
 
     private void InitializeWheelParameters()
     {
-        wheel = new Wheel();
+        _wheel = new Wheel();
         _gridSizeX = (int)_gridModel.GetCellResolution().x;
         _gridSizeY = (int)_gridModel.GetCellResolution().y;
-        wheel.wheelGrid = new List<bool>();
-        wheel.wheelPrefab = _wheelPrefab; 
-        wheel.wheelCellPrefab = _wheelCellPrefab; 
+        _wheel.wheelGrid = new List<bool>();
+        _wheel.wheelPrefab = _wheelPrefab; 
+        _wheel.wheelCellPrefab = _wheelCellPrefab; 
     }
     private void CreateWheelGrid()
     {
@@ -46,11 +46,11 @@ public class WheelFactory : MonoBehaviour
             minCol = (int)Math.Min(minCol, col);
             maxCol = (int)Math.Max(maxCol, col);
         }
-        minGridResolution = new Vector2(maxRow - minRow + 1, maxCol - minCol + 1);
+        _minGridResolution = new Vector2(maxRow - minRow + 1, maxCol - minCol + 1);
         
-        for (int i = 0; i < (int)minGridResolution.x * (int)minGridResolution.y; i++)
+        for (int i = 0; i < (int)_minGridResolution.x * (int)_minGridResolution.y; i++)
         {
-            wheel.wheelGrid.Add(false);
+            _wheel.wheelGrid.Add(false);
         }
 
         var _leftTopCoordinate = minRow * _gridSizeX + minCol;
@@ -58,30 +58,26 @@ public class WheelFactory : MonoBehaviour
         var _leftBottomCoordinate = minRow * _gridSizeX + maxCol;
         var _rightTopCoordinate = maxRow * _gridSizeX + maxCol;
 
-        for (int i = 0; i < minGridResolution.x; i++)
+        for (int i = 0; i < _minGridResolution.x; i++)
         {
-            for (int j = 0; j < minGridResolution.y; j++)
+            for (int j = 0; j < _minGridResolution.y; j++)
             {
-                var index = (int) (i*minGridResolution.y + j);
+                var index = (int) (i*_minGridResolution.y + j);
                 var subIndex = (int) ((_leftTopCoordinate + j) + _gridSizeX * i);
-                wheel.wheelGrid[index] = _gridModel.GetCellByIndex(subIndex);
+                _wheel.wheelGrid[index] = _gridModel.GetCellByIndex(subIndex);
             }
         }
     }
 
+    
     public Wheel CreateWheel()
     {
+        
         InitializeWheelParameters();
         CreateWheelGrid();
-        wheel.wheelPrefab.GetComponent<GridLayoutGroup>().constraint = GridLayoutGroup.Constraint.FixedColumnCount;
-        wheel.wheelPrefab.GetComponent<GridLayoutGroup>().constraintCount = (int)minGridResolution.y;
-        wheel.wheelPrefab.GetComponent<WheelJoint2D>().useMotor = false;
-        // var jointMotor2D = new JointMotor2D
-        // {
-        //     motorSpeed = wheelModel.GetMotorParams().x,
-        //     maxMotorTorque = wheelModel.GetMotorParams().y
-        // };
-        // wheel.wheelPrefab.GetComponent<WheelJoint2D>().motor = jointMotor2D;
-        return wheel;
+        _wheel.wheelPrefab.GetComponent<GridLayoutGroup>().constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+        _wheel.wheelPrefab.GetComponent<GridLayoutGroup>().constraintCount = (int)_minGridResolution.y;
+        _wheel.wheelPrefab.GetComponent<WheelJoint2D>().useMotor = false;
+        return _wheel;
     }
 }
