@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameplayController : MonoBehaviour
 {
     [SerializeField] private GridModel _gridModel;
+    [SerializeField] private GridController _gridController;
     [SerializeField] private TerrainController _terrainController;
     [SerializeField] private VehicleFactory _vehicleFactory;
     [SerializeField] private EventManager _eventManager;
@@ -42,9 +43,11 @@ public class GameplayController : MonoBehaviour
         _gridModel.ToggleCell(cellIndex, true);
     }
 
+    
     public void ResetVehicle()
     {
         _vehicleFactory.ResetVehicle();
+        _gridModel.WholeGridReset(false);
     }
     public void CreateVehicle()
     {

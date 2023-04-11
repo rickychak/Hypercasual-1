@@ -50,7 +50,7 @@ public class UIManager : MonoBehaviour
         _button = _buttonGameObject.transform.GetComponent<Button>();
         _image = _buttonGameObject.transform.GetComponent<Image>();
         _button.onClick.AddListener(DispatchGUIButtonSignal);
-        _gridController = transform.GetComponent<GridController>();
+        _gridController = FindObjectOfType<GridController>();
     }
     
     #region Button
@@ -128,8 +128,9 @@ public class UIManager : MonoBehaviour
     #endregion
     
     #region Grid
-    public void CellTurnBlackOnClick(Vector3 touchPosition)
+    private void CellTurnBlackOnClick(Vector3 touchPosition)
     { 
+        
         var cellPosition = _tilemap.WorldToCell(touchPosition); 
         _tilemap.SetTileFlags(cellPosition, TileFlags.None); 
         _tilemap.SetColor(cellPosition, Color.black); 
@@ -139,11 +140,10 @@ public class UIManager : MonoBehaviour
     public void GridTurnWhite()
     {
         BoundsInt bounds = _tilemap.cellBounds;
-        for (int x = 0; x < bounds.size.x; x++) {
-            for (int y = 0; y < bounds.size.y; y++) {
-                _tilemap.SetColor(new Vector3Int(x,y,0), Color.white);
-            }
-        }        
+        foreach (var position in bounds.allPositionsWithin)
+        {
+            _tilemap.SetColor(position, Color.white);
+        }
     }
    
    

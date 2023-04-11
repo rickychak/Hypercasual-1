@@ -27,7 +27,6 @@ public class InputController : MonoBehaviour, IInputController
 
     public void SetInputModelCellPosition()
     {
-        Debug.Log(Input.GetTouch(0).position);
         if (Input.touchCount <= 0) return;
         _touchPosition = Input.GetTouch(0).position;
         _raycastHit2D = Physics2D.Raycast(_mainCamera.ScreenToWorldPoint(_touchPosition), Vector3.back, 5, _layerMask);

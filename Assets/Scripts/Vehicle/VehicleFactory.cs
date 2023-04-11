@@ -38,7 +38,6 @@ public class VehicleFactory : MonoBehaviour
         wheel.transform.GetComponent<WheelJoint2D>().useMotor = false;
         wheel.transform.GetComponent<WheelJoint2D>().connectedBody = _vehicle.GetComponent<Rigidbody2D>();
         wheel.transform.GetComponent<WheelJoint2D>().connectedAnchor = _anchorOnVehicle+ Vector2.left * _count;
-        Debug.Log(wheel.transform.GetComponent<WheelJoint2D>().connectedAnchor);
         wheel.transform.GetComponent<RectTransform>().localPosition = Vector3.down*0.5f;
         _count++;
 

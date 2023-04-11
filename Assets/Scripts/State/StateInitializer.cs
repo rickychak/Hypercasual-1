@@ -32,7 +32,6 @@ public class StateInitializer : MonoBehaviour
 
     private void OnGUIButtonClick()
     {
-        Debug.Log("Here we go");
         _stateMachine.ChangeState();
     }
 }

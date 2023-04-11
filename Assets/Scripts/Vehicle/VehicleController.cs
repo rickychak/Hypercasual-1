@@ -16,10 +16,7 @@ public class VehicleController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log(col.gameObject.layer);
         if (!col.transform.CompareTag("Boundary") && col.gameObject.layer != 6) return;
         _eventManager.DispatchGameOverSignal();
-        
-
     }
 }

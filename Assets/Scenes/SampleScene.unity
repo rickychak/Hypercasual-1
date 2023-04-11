@@ -918,10 +918,10 @@ GameObject:
   - component: {fileID: 704679151}
   - component: {fileID: 704679150}
   - component: {fileID: 704679149}
-  - component: {fileID: 704679163}
-  - component: {fileID: 704679159}
-  - component: {fileID: 704679158}
   - component: {fileID: 704679160}
+  - component: {fileID: 704679163}
+  - component: {fileID: 704679158}
+  - component: {fileID: 704679159}
   - component: {fileID: 704679161}
   - component: {fileID: 704679162}
   m_Layer: 0
