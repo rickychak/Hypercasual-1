@@ -72,7 +72,6 @@ public class WheelFactory : MonoBehaviour
     
     public Wheel CreateWheel()
     {
-        
         InitializeWheelParameters();
         CreateWheelGrid();
         _wheel.wheelPrefab.GetComponent<GridLayoutGroup>().constraint = GridLayoutGroup.Constraint.FixedColumnCount;

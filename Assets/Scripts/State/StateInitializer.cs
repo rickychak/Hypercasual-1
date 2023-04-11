@@ -24,6 +24,7 @@ public class StateInitializer : MonoBehaviour
     {
         _stateMachine = new StateMachine();
         _eventManager.GUIButtonClickSignal += OnGUIButtonClick;
+        _eventManager.GameOverSignal += OnGUIButtonClick;
         _stateDict.Add(StateEnum.DrawState, new DrawState(_uiManager, _gameplayController));
         _stateDict.Add(StateEnum.PlayState, new PlayState(_uiManager, _gameplayController));
         _stateMachine.Initialize(_stateDict);
@@ -31,6 +32,7 @@ public class StateInitializer : MonoBehaviour
 
     private void OnGUIButtonClick()
     {
+        Debug.Log("Here we go");
         _stateMachine.ChangeState();
     }
 }

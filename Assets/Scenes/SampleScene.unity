@@ -237,7 +237,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 2
 --- !u!1 &322638298
 GameObject:
@@ -416,7 +416,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 2
 --- !u!61 &387231873
 BoxCollider2D:
@@ -696,8 +696,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1adba7fc11154754fa3278a1aa030e60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _wheelFactory: {fileID: 589686602}
-  _vehiclePrefab: {fileID: 3575445826736455163, guid: 6fe9988008cd1364b9afd5ca77e44d91, type: 3}
+  wheelFactory: {fileID: 589686602}
+  vehiclePrefab: {fileID: 3575445826736455163, guid: 6fe9988008cd1364b9afd5ca77e44d91, type: 3}
 --- !u!114 &589686602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1039,6 +1039,7 @@ MonoBehaviour:
   _gridModel: {fileID: 2089373295}
   _terrainController: {fileID: 704679162}
   _vehicleFactory: {fileID: 589686601}
+  _eventManager: {fileID: 0}
   _layerMask:
     serializedVersion: 2
     m_Bits: 256
@@ -15099,7 +15100,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 2
 --- !u!61 &1131758525
 BoxCollider2D:
@@ -15624,7 +15625,7 @@ GameObject:
   - component: {fileID: 1948988370}
   m_Layer: 5
   m_Name: LeftBound
-  m_TagString: Untagged
+  m_TagString: Boundary
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15642,7 +15643,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2114074675}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -15783,7 +15784,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2114074675}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16105,8 +16106,8 @@ RectTransform:
   - {fileID: 2041558890}
   - {fileID: 1903593276}
   - {fileID: 1630209134}
-  - {fileID: 1948988369}
   - {fileID: 2043460642}
+  - {fileID: 1948988369}
   - {fileID: 1866028556}
   - {fileID: 474490910}
   m_Father: {fileID: 0}
