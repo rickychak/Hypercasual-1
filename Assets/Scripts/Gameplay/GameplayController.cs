@@ -9,37 +9,20 @@ public class GameplayController : MonoBehaviour
     [SerializeField] private VehicleFactory _vehicleFactory;
     [SerializeField] private EventManager _eventManager;
     
-    private Camera _mainCamera;
     private Vector3 _touchPosition;
     private RaycastHit2D _raycastHit2D;
     private Vector3Int _cellPosition;
-    public event Action<Vector3> InputEvent;
-    
-    [SerializeField] private LayerMask _layerMask;
 
 
     private void Awake()
     {
-        _mainCamera = Camera.main;
+        _eventManager = FindObjectOfType<EventManager>();
     }
-
-    private void Update()
-    {
-        SetInputModelCellPosition();
-    }
+    
 
     public void ToggleMapMovement()
     {
         _terrainController.ToggleMapSimulation();
-    }
-
-    private void SetInputModelCellPosition()
-    {
-        if (Input.touchCount <= 0) return;
-        _touchPosition = Input.GetTouch(0).position;
-        _raycastHit2D = Physics2D.Raycast(_mainCamera.ScreenToWorldPoint(_touchPosition), Vector3.forward, 10, _layerMask);
-        if (ReferenceEquals(_raycastHit2D.collider, null)) return;
-        InputEvent?.Invoke(_mainCamera.ScreenToWorldPoint(_touchPosition));
     }
     
     
@@ -59,6 +42,10 @@ public class GameplayController : MonoBehaviour
         _gridModel.ToggleCell(cellIndex, true);
     }
 
+    public void ResetVehicle()
+    {
+        _vehicleFactory.ResetVehicle();
+    }
     public void CreateVehicle()
     {
         _vehicleFactory.CreateVehicle();

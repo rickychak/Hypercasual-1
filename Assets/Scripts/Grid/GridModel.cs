@@ -36,7 +36,7 @@ public class GridModel : MonoBehaviour
         _grid[index] = boo;
     }
 
-    public void GridUpdate(bool boo)
+    public void WholeGridReset(bool boo)
     {
         for (int i = 0; i < _grid.Count; i++)
         {

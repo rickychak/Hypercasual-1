@@ -25,9 +25,13 @@ public class GridController : MonoBehaviour
     }
     public void ToggleCell(Vector3Int cellPosition)
     {
-        
         var cellIndex = CellPositionToGridIndex(cellPosition);
         if (_gridModel.GetCellByIndex(cellIndex)) return;
         _gridModel.ToggleCell(cellIndex, true);
+    }
+
+    public void SetWholeGrid(bool boo)
+    {
+        _gridModel.WholeGridReset(boo);
     }
 }

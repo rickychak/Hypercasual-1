@@ -8,14 +8,15 @@ public class InputController : MonoBehaviour, IInputController
     private RaycastHit2D _raycastHit2D;
     
     private Vector3Int _cellPosition;
-    public event Action<Vector3> InputEvent;
+    private EventManager _eventManager;
     
     [SerializeField] private LayerMask _layerMask;
 
 
-    void Start()
+    void Awake()
     {
         _mainCamera = Camera.main;
+        _eventManager = FindObjectOfType<EventManager>();
     }
 
     // Update is called once per frame
@@ -26,15 +27,14 @@ public class InputController : MonoBehaviour, IInputController
 
     public void SetInputModelCellPosition()
     {
+        Debug.Log(Input.GetTouch(0).position);
         if (Input.touchCount <= 0) return;
         _touchPosition = Input.GetTouch(0).position;
         _raycastHit2D = Physics2D.Raycast(_mainCamera.ScreenToWorldPoint(_touchPosition), Vector3.back, 5, _layerMask);
         //if (_raycastHit2D.collider == null) return;
         if (ReferenceEquals(_raycastHit2D.collider, null)) return;
-        InputEvent?.Invoke(_mainCamera.ScreenToWorldPoint(_touchPosition));
+        _eventManager.DispatchInputSignal(_mainCamera.ScreenToWorldPoint(_touchPosition));
     }
-    
-    
 }
 
 

@@ -44,6 +44,14 @@ public class VehicleFactory : MonoBehaviour
 
     }
 
+    public void ResetVehicle()
+    {
+        _count = 0;
+        Destroy(_vehicle);
+    }
+    
+    
+
     private void BootEngine(GameObject wheel)
     {
         wheel.GetComponent<WheelJoint2D>().useMotor = true;

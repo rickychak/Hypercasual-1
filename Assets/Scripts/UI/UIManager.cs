@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -11,6 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _text;
     [SerializeField] private GameObject backgroundParent;
     [SerializeField] private GameObject leftBound;
+    [SerializeField] private Tilemap _tilemap;
     
     private Vector2 _backgroundScrollingSpeed = Vector2.left;
     private GameObject _lastQueueObject;
@@ -21,16 +23,34 @@ public class UIManager : MonoBehaviour
     private readonly Color[] _colourpalette = { new Color(0.43f, 1f, 0.38f), new Color(1f, 0.5f, 0.46f) };
     private Button _button;
     private Image _image;
+
     
     
     private float _score;
     private bool _isScoreCounting = true;
+    
+    
+    private GridController _gridController;
+
+
+    private void OnEnable()
+    {
+        _eventManager.UserInputOnGridSignal += CellTurnBlackOnClick;
+    }
+    
+    private void OnDisable()
+    {
+        _eventManager.UserInputOnGridSignal -= CellTurnBlackOnClick;
+    }
+
+ 
     void Awake()
     {
         BackGroundGameObjectsSetup();
         _button = _buttonGameObject.transform.GetComponent<Button>();
         _image = _buttonGameObject.transform.GetComponent<Image>();
-        _button.onClick.AddListener(DispatchGUIButtonSignal);    
+        _button.onClick.AddListener(DispatchGUIButtonSignal);
+        _gridController = transform.GetComponent<GridController>();
     }
     
     #region Button
@@ -107,15 +127,32 @@ public class UIManager : MonoBehaviour
     
     #endregion
     
+    #region Grid
+    public void CellTurnBlackOnClick(Vector3 touchPosition)
+    { 
+        var cellPosition = _tilemap.WorldToCell(touchPosition); 
+        _tilemap.SetTileFlags(cellPosition, TileFlags.None); 
+        _tilemap.SetColor(cellPosition, Color.black); 
+        _gridController.ToggleCell(cellPosition);
+    }
 
+    public void GridTurnWhite()
+    {
+        BoundsInt bounds = _tilemap.cellBounds;
+        for (int x = 0; x < bounds.size.x; x++) {
+            for (int y = 0; y < bounds.size.y; y++) {
+                _tilemap.SetColor(new Vector3Int(x,y,0), Color.white);
+            }
+        }        
+    }
+   
+   
+    #endregion
     private void Update()
     {
         if(_backgroundsQueue.Peek().transform.position.x+0.5f < leftBound.transform.position.x) BackgroundReposition();
         if (!_isScoreCounting) return;
         _score += Time.deltaTime;
         SetGUIScoreText();
-        
-        
-        
     }
 }

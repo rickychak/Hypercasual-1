@@ -918,6 +918,7 @@ GameObject:
   - component: {fileID: 704679151}
   - component: {fileID: 704679150}
   - component: {fileID: 704679149}
+  - component: {fileID: 704679163}
   - component: {fileID: 704679159}
   - component: {fileID: 704679158}
   - component: {fileID: 704679160}
@@ -997,6 +998,7 @@ MonoBehaviour:
   _text: {fileID: 681144937}
   backgroundParent: {fileID: 160192975}
   leftBound: {fileID: 1948988368}
+  _tilemap: {fileID: 964885385}
 --- !u!114 &704679159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1039,10 +1041,7 @@ MonoBehaviour:
   _gridModel: {fileID: 2089373295}
   _terrainController: {fileID: 704679162}
   _vehicleFactory: {fileID: 589686601}
-  _eventManager: {fileID: 0}
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 256
+  _eventManager: {fileID: 704679160}
 --- !u!114 &704679162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1058,6 +1057,21 @@ MonoBehaviour:
   _terrainModel: {fileID: 2089373299}
   _leftBound: {fileID: 1948988368}
   mapParent: {fileID: 1245306392}
+--- !u!114 &704679163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704679148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94d915c829059e44287867f8ae9fcac6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &918592572
 GameObject:
   m_ObjectHideFlags: 0
@@ -1155,7 +1169,6 @@ GameObject:
   - component: {fileID: 964885384}
   - component: {fileID: 964885386}
   - component: {fileID: 964885388}
-  - component: {fileID: 964885387}
   m_Layer: 8
   m_Name: Tilemap
   m_TagString: Untagged
@@ -14631,20 +14644,6 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
---- !u!114 &964885387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 964885382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30b548f7044896b4d8f5c57dd0474d03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gameplayController: {fileID: 704679161}
-  _tilemap: {fileID: 964885385}
 --- !u!114 &964885388
 MonoBehaviour:
   m_ObjectHideFlags: 0

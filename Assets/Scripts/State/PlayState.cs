@@ -26,5 +26,7 @@ public class PlayState : IState
 
     public void Exit()
     {
+        _gameplayController.ResetVehicle();
+        _uiManager.GridTurnWhite();
     }
 }
