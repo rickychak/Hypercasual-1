@@ -27,6 +27,7 @@ public class StateInitializer : MonoBehaviour
         _eventManager.GameOverSignal += OnGUIButtonClick;
         _stateDict.Add(StateEnum.DrawState, new DrawState(_uiManager, _gameplayController));
         _stateDict.Add(StateEnum.PlayState, new PlayState(_uiManager, _gameplayController));
+        _stateDict.Add(StateEnum.GameOverState, new GameOverState(_uiManager, _gameplayController));
         _stateMachine.Initialize(_stateDict);
     }
 
