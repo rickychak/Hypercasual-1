@@ -6,8 +6,7 @@ using UnityEngine;
 public class VehicleController : MonoBehaviour
 {
     private EventManager _eventManager;
-
-
+    private bool _isCollided = false;
     private void OnEnable()
     {
         _eventManager = FindObjectOfType<EventManager>();
@@ -17,6 +16,8 @@ public class VehicleController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (!col.transform.CompareTag("Boundary") && col.gameObject.layer != 6) return;
+        if (_isCollided) return;
+        _isCollided = true;
         _eventManager.DispatchGameOverSignal();
     }
 }

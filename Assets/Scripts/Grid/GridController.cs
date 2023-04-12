@@ -34,4 +34,9 @@ public class GridController : MonoBehaviour
     {
         _gridModel.WholeGridReset(boo);
     }
+
+    public void ToggleGridDrawing()
+    {
+        transform.GetComponent<TilemapCollider2D>().enabled = !transform.GetComponent<TilemapCollider2D>().enabled;
+    }
 }

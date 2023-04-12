@@ -20,7 +20,7 @@ public class DrawState : IState
         _uiManager.ResetGUIScore();
         _uiManager.ToggleBackgroundScrolling();
         _gameplayController.ToggleMapMovement();
-        //_gameplayController.ResetCameraVelocity();
+        _gameplayController.ToggleDrawing();
         
     }
 

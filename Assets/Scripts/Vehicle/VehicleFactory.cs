@@ -26,7 +26,7 @@ public class VehicleFactory : MonoBehaviour
 
         if (wheelInfo.wheelGrid.Count > 100)
         {
-            wheel.transform.localScale *= 0.1f;
+            wheel.transform.localScale *= 0.25f;
         }
         return wheel;
     }

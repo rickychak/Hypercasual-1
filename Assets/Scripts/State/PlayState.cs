@@ -17,16 +17,17 @@ public class PlayState : IState
 
     public void Enter()
     {
+        
         _uiManager.GUIButtonChangeColorOnClick(1);
         _uiManager.ToggleGUIScoreCounting();
         _uiManager.ToggleBackgroundScrolling();
         _gameplayController.ToggleMapMovement();
         _gameplayController.CreateVehicle();
+        _gameplayController.ToggleDrawing();
     }
 
     public void Exit()
     {
-        _gameplayController.ResetVehicle();
-        _uiManager.GridTurnWhite();
+        _uiManager.ToggleGameOverCollider();
     }
 }

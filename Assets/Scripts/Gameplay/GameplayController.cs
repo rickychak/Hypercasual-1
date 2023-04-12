@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GameplayController : MonoBehaviour
 {
-    [SerializeField] private GridModel _gridModel;
     [SerializeField] private GridController _gridController;
     [SerializeField] private TerrainController _terrainController;
     [SerializeField] private VehicleFactory _vehicleFactory;
@@ -25,29 +24,17 @@ public class GameplayController : MonoBehaviour
     {
         _terrainController.ToggleMapSimulation();
     }
-    
-    
-    private int CellPositionToGridIndex(Vector3Int cellPosition)
-    {
-        var gridResolution = _gridModel.GetCellResolution();
-        var cleansedCellPosition = new Vector2(cellPosition.x + gridResolution.x/2,
-            cellPosition.y + gridResolution.y-1);
 
-        var gridIndex = (cleansedCellPosition.x - (cleansedCellPosition.y - gridResolution.y) * gridResolution.x);
-        return (int)gridIndex;
-    }
-    public void ToggleCell(Vector3Int cellPosition)
+    public void ToggleDrawing()
     {
-        var cellIndex = CellPositionToGridIndex(cellPosition);
-        if (_gridModel.GetCellByIndex(cellIndex)) return;
-        _gridModel.ToggleCell(cellIndex, true);
+        _gridController.ToggleGridDrawing();
     }
 
     
     public void ResetVehicle()
     {
         _vehicleFactory.ResetVehicle();
-        _gridModel.WholeGridReset(false);
+        _gridController.SetWholeGrid(false);
     }
     public void CreateVehicle()
     {

@@ -1,14 +1,18 @@
-using System;
+using DG.Tweening;
 using System.Collections.Generic;
+using System.Numerics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private EventManager _eventManager;
     [SerializeField] private GameObject _buttonGameObject;
+    [SerializeField] private GameObject _gameOverScreen;
     [SerializeField] private TextMeshProUGUI _text;
     [SerializeField] private GameObject backgroundParent;
     [SerializeField] private GameObject leftBound;
@@ -28,8 +32,8 @@ public class UIManager : MonoBehaviour
     
     private float _score;
     private bool _isScoreCounting = true;
-    
-    
+
+    private Vector3 _gameoverScreenOriginalScale = new Vector3(900,2000,1);
     private GridController _gridController;
 
 
@@ -148,6 +152,25 @@ public class UIManager : MonoBehaviour
    
    
     #endregion
+
+
+    public void FadeInGameOver()
+    {
+        Tween myTween = _gameOverScreen.transform.DOScale(_gameoverScreenOriginalScale, 0.5f);
+    }
+    
+    public void FadeOutGameOver()
+    {
+        Tween myTween = _gameOverScreen.transform.DOScale(Vector3.zero, 0.5f);
+        
+    }
+
+    public void ToggleGameOverCollider()
+    {
+        _gameOverScreen.transform.GetComponent<BoxCollider2D>().enabled = !_gameOverScreen.transform.GetComponent<BoxCollider2D>().enabled;
+    }
+    
+    
     private void Update()
     {
         if(_backgroundsQueue.Peek().transform.position.x+0.5f < leftBound.transform.position.x) BackgroundReposition();

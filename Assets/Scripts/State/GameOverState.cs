@@ -10,11 +10,15 @@
     }
     public void Enter()
     {
-        
+        _uiManager.FadeInGameOver();
+        _uiManager.GridTurnWhite();
+        _gameplayController.ResetVehicle();      
     }
 
     public void Exit()
     {
-        throw new System.NotImplementedException();
+        _uiManager.FadeOutGameOver();
+        _uiManager.ToggleGameOverCollider();
+
     }
 }

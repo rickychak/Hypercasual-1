@@ -169,7 +169,8 @@ GameObject:
   - component: {fileID: 184019921}
   - component: {fileID: 184019920}
   - component: {fileID: 184019922}
-  m_Layer: 5
+  - component: {fileID: 184019923}
+  m_Layer: 10
   m_Name: GameOverScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +186,7 @@ RectTransform:
   m_GameObject: {fileID: 184019918}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 900, y: 2000, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 909582266}
@@ -264,10 +265,10 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 184019918}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -283,6 +284,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &184019923
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184019918}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &317160324
 GameObject:
   m_ObjectHideFlags: 0
@@ -1121,6 +1143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _eventManager: {fileID: 704679160}
   _buttonGameObject: {fileID: 1903593275}
+  _gameOverScreen: {fileID: 184019918}
   _text: {fileID: 681144937}
   backgroundParent: {fileID: 160192975}
   leftBound: {fileID: 1948988368}
@@ -1164,8 +1187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 451d18fe77d618340ba54ff558f11afa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gridModel: {fileID: 2089373295}
-  _gridController: {fileID: 0}
+  _gridController: {fileID: 964885388}
   _terrainController: {fileID: 704679162}
   _vehicleFactory: {fileID: 589686601}
   _eventManager: {fileID: 704679160}
@@ -1196,9 +1218,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94d915c829059e44287867f8ae9fcac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _layerMask:
+  _layerMaskForGrid:
     serializedVersion: 2
     m_Bits: 256
+  _layerMaskForScreen:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &909582265
 GameObject:
   m_ObjectHideFlags: 0
@@ -1208,7 +1233,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 909582266}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1333,7 +1358,7 @@ GameObject:
   - component: {fileID: 954036656}
   - component: {fileID: 954036658}
   - component: {fileID: 954036657}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: HighestScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14974,7 +14999,7 @@ TilemapCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 964885382}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -15569,7 +15594,7 @@ GameObject:
   - component: {fileID: 1475471823}
   - component: {fileID: 1475471825}
   - component: {fileID: 1475471824}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: CurrentScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15888,7 +15913,7 @@ GameObject:
   - component: {fileID: 1758974362}
   - component: {fileID: 1758974364}
   - component: {fileID: 1758974363}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16060,7 +16085,7 @@ GameObject:
   - component: {fileID: 1859138613}
   - component: {fileID: 1859138615}
   - component: {fileID: 1859138614}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: GameOverText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16479,7 +16504,7 @@ GameObject:
   - component: {fileID: 1934227136}
   - component: {fileID: 1934227138}
   - component: {fileID: 1934227137}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}

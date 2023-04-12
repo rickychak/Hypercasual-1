@@ -10,7 +10,8 @@ public class InputController : MonoBehaviour, IInputController
     private Vector3Int _cellPosition;
     private EventManager _eventManager;
     
-    [SerializeField] private LayerMask _layerMask;
+    [SerializeField] private LayerMask _layerMaskForGrid;
+    [SerializeField] private LayerMask _layerMaskForScreen;
 
 
     void Awake()
@@ -22,14 +23,23 @@ public class InputController : MonoBehaviour, IInputController
     // Update is called once per frame
     void Update()
     {
+        if (Input.touchCount <= 0) return;
         SetInputModelCellPosition();
+        DetectStateTransitionOnClick();
     }
 
+    public void DetectStateTransitionOnClick()
+    {
+        
+        _raycastHit2D = Physics2D.Raycast(_mainCamera.ScreenToWorldPoint(_touchPosition), Vector3.back, 5, _layerMaskForScreen);
+        if (ReferenceEquals(_raycastHit2D.collider, null)) return;
+        _eventManager.DispatchGUIButtonSignal();
+    }
+    
     public void SetInputModelCellPosition()
     {
-        if (Input.touchCount <= 0) return;
         _touchPosition = Input.GetTouch(0).position;
-        _raycastHit2D = Physics2D.Raycast(_mainCamera.ScreenToWorldPoint(_touchPosition), Vector3.back, 5, _layerMask);
+        _raycastHit2D = Physics2D.Raycast(_mainCamera.ScreenToWorldPoint(_touchPosition), Vector3.back, 5, _layerMaskForGrid);
         //if (_raycastHit2D.collider == null) return;
         if (ReferenceEquals(_raycastHit2D.collider, null)) return;
         _eventManager.DispatchInputSignal(_mainCamera.ScreenToWorldPoint(_touchPosition));

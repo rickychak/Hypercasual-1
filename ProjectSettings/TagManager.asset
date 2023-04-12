@@ -4,11 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - UI
-  - Wheel
-  - Button
   - Boundary
-  - Grid
+  - StateTransition
   layers:
   - Default
   - TransparentFX
@@ -20,7 +17,7 @@ TagManager:
   - Vehicle
   - Grid
   - Background
-  - 
+  - StateTransition
   - 
   - 
   - 
