@@ -16,10 +16,7 @@ public class DrawState : IState
     public void Enter()
     {
         _uiManager.GUIButtonChangeColorOnClick(0);
-        _uiManager.ToggleGUIScoreCounting();
         _uiManager.ResetGUIScore();
-        _uiManager.ToggleBackgroundScrolling();
-        _gameplayController.ToggleMapMovement();
         _gameplayController.ToggleDrawing();
         
     }

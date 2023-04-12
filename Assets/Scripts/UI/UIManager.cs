@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour
     
     
     private float _score;
-    private bool _isScoreCounting = true;
+    private bool _isScoreCounting = false;
 
     private Vector3 _gameoverScreenOriginalScale = new Vector3(900,2000,1);
     private GridController _gridController;
@@ -78,6 +78,7 @@ public class UIManager : MonoBehaviour
     public void ResetGUIScore()
     {
         _score = 0;
+        SetGUIScoreText();
     }
 
     private void SetGUIScoreText()

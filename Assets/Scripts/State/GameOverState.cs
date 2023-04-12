@@ -12,7 +12,11 @@
     {
         _uiManager.FadeInGameOver();
         _uiManager.GridTurnWhite();
-        _gameplayController.ResetVehicle();      
+        _gameplayController.ResetVehicle();  
+        _uiManager.ToggleGUIScoreCounting();
+        _uiManager.ToggleBackgroundScrolling();
+        _gameplayController.ToggleMapMovement();
+        
     }
 
     public void Exit()
