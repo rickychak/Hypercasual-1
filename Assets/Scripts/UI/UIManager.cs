@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using System.Collections.Generic;
 using System.Numerics;
@@ -13,6 +14,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private EventManager _eventManager;
     [SerializeField] private GameObject _buttonGameObject;
     [SerializeField] private GameObject _gameOverScreen;
+    [SerializeField] private GameObject _gameOverHighestScore;
+    [SerializeField] private GameObject _gameOverCurrentScore;
     [SerializeField] private TextMeshProUGUI _text;
     [SerializeField] private GameObject backgroundParent;
     [SerializeField] private GameObject leftBound;
@@ -28,8 +31,6 @@ public class UIManager : MonoBehaviour
     private Button _button;
     private Image _image;
 
-    
-    
     private float _score;
     private bool _isScoreCounting = false;
 
@@ -67,6 +68,12 @@ public class UIManager : MonoBehaviour
     {
         _image.color = _colourpalette[index];
     }
+
+    public void ToggleButton()
+    {
+        _button.enabled = !_button.enabled;
+    }
+    
     #endregion
 
     #region Score 
@@ -85,6 +92,14 @@ public class UIManager : MonoBehaviour
     {
         _text.text = _score.ToString("0.00");
     }
+
+    public void SetGameOverScoreText()
+    {
+        _gameOverCurrentScore.GetComponent<TextMeshPro>().text = _score.ToString("0.00");
+        if (_score <= (float)Convert.ToDouble(_gameOverHighestScore.GetComponent<TextMeshPro>().text)) return;
+        _gameOverHighestScore.GetComponent<TextMeshPro>().text = _score.ToString("0.00");
+    }
+
     #endregion
 
     #region Background
