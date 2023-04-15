@@ -10,7 +10,6 @@ public class VehicleController : MonoBehaviour
     private void OnEnable()
     {
         _eventManager = FindObjectOfType<EventManager>();
-        
     }
 
     private void OnCollisionEnter2D(Collision2D col)

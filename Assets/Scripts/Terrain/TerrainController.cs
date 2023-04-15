@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class TerrainController:MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class TerrainController:MonoBehaviour
         if (_mapsQueue.Peek().transform.position.x+_terrainModel.GetRepositionThreshold() > _leftBound.transform.position.x) return;
         var outBoundMap = _mapsQueue.Dequeue();
         outBoundMap.transform.position = _lastQueueObject.transform.position + Vector3.right*_terrainModel.GetTerrainSize();
+        var outBoundMapYCoord = Math.Min(Math.Max(0,outBoundMap.transform.position.y + Random.Range(-0.3f, 0.3f)), 1.5f);
+        outBoundMap.transform.position += Vector3.up*(-outBoundMap.transform.position.y + outBoundMapYCoord);
         _lastQueueObject = outBoundMap;
         _mapsQueue.Enqueue(_lastQueueObject);
     }
