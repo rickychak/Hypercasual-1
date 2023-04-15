@@ -24,6 +24,11 @@ public class GameplayController : MonoBehaviour
         _terrainController.ToggleMapSimulation();
     }
 
+    public void ResetMap()
+    {
+        _terrainController.ResetMapCoordinate();
+    }
+
     public void DisableDrawing()
     {
         _eventManager.DispatchInputEnableSignal(false);

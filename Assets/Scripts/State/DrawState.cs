@@ -15,7 +15,7 @@ public class DrawState : IState
     {
         _uiManager.GUIButtonChangeColorOnClick(0);
         _uiManager.ResetGUIScore();
-        
+        _gameplayController.ResetMap();
     }
 
     public void Exit()

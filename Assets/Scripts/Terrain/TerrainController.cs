@@ -14,6 +14,7 @@ public class TerrainController:MonoBehaviour
     private Rigidbody2D[] _mapsRigidbody2DsList;
     private List<GameObject> _backgroundsList;
     private List<GameObject> _mapsList;
+    private List<Vector3> _mapOriginalPosition = new();
 
     private void Awake()
     {
@@ -23,6 +24,7 @@ public class TerrainController:MonoBehaviour
         {
             _mapsQueue.Enqueue(mapGO);
             _lastQueueObject = mapGO;
+            _mapOriginalPosition.Add(mapGO.transform.position);
         }
         _mapsRigidbody2DsList = mapParent.GetComponentsInChildren<Rigidbody2D>();
         
@@ -40,6 +42,16 @@ public class TerrainController:MonoBehaviour
         _mapsQueue.Enqueue(_lastQueueObject);
     }
 
+
+    public void ResetMapCoordinate()
+    {
+        int _count = 0;
+        foreach (var mapGO in _mapsList)
+        {
+            mapGO.transform.position = _mapOriginalPosition[_count];
+            _count++;
+        }
+    }
     private void SetMapVelocity()
     {
         foreach (var mapRigidBody in _mapsRigidbody2DsList)
