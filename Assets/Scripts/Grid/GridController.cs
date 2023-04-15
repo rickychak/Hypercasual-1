@@ -4,7 +4,6 @@ using UnityEngine.Tilemaps;
 public class GridController : MonoBehaviour
 {
     [SerializeField]private GridModel _gridModel;
-    private GridView _gridView;
     [SerializeField] private Tilemap tilemap;
 
 

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿
 public class DrawState : IState
 {
     private UIManager _uiManager;
