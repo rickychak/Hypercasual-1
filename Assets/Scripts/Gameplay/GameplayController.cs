@@ -25,9 +25,20 @@ public class GameplayController : MonoBehaviour
         _terrainController.ToggleMapSimulation();
     }
 
-    public void ToggleDrawing()
+    public void DisableDrawing()
     {
-        _gridController.ToggleGridDrawing();
+        _eventManager.DispatchInputEnableSignal(false);
+    }
+    
+    public void EnableDrawing()
+    {
+        StartCoroutine(_coToggleGridDrawing(true));
+    }
+
+    private IEnumerator _coToggleGridDrawing(bool boo)
+    {
+        yield return new WaitForSeconds(0.35f);
+        _eventManager.DispatchInputEnableSignal(boo);
     }
 
     

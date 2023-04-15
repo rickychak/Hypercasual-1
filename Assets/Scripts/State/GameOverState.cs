@@ -24,6 +24,7 @@
         _uiManager.FadeOutGameOver();
         _uiManager.ToggleGameOverCollider();
         _uiManager.ToggleButton();
+        _gameplayController.EnableDrawing();
 
     }
 }

@@ -169,7 +169,7 @@ public class UIManager : MonoBehaviour
    
     #endregion
 
-
+    #region GameOverScreem
     public void FadeInGameOver()
     {
         Tween myTween = _gameOverScreen.transform.DOScale(_gameoverScreenOriginalScale, 0.5f);
@@ -185,6 +185,8 @@ public class UIManager : MonoBehaviour
     {
         _gameOverScreen.transform.GetComponent<BoxCollider2D>().enabled = !_gameOverScreen.transform.GetComponent<BoxCollider2D>().enabled;
     }
+    #endregion
+    
     
     
     private void Update()

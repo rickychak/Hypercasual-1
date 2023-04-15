@@ -14,7 +14,7 @@ public class VehicleController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (!col.transform.CompareTag("Boundary") && col.gameObject.layer != 6) return;
+        if (!col.transform.CompareTag("Boundary")) return;
         if (_isCollided) return;
         _isCollided = true;
         _eventManager.DispatchGameOverSignal();

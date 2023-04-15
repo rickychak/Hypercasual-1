@@ -23,7 +23,7 @@ public class PlayState : IState
         _uiManager.ToggleBackgroundScrolling();
         _gameplayController.ToggleMapMovement();
         _gameplayController.CreateVehicle();
-        _gameplayController.ToggleDrawing();
+        _gameplayController.DisableDrawing();
     }
 
     public void Exit()

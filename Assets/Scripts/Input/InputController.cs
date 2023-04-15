@@ -13,6 +13,7 @@ public class InputController : MonoBehaviour, IInputController
     [SerializeField] private LayerMask _layerMaskForGrid;
     [SerializeField] private LayerMask _layerMaskForScreen;
 
+    private bool _enableDrawing = true;
 
     void Awake()
     {
@@ -20,12 +21,28 @@ public class InputController : MonoBehaviour, IInputController
         _eventManager = FindObjectOfType<EventManager>();
     }
 
+    private void OnEnable()
+    {
+        _eventManager.EnableDrawingGridSignal += ToggleDrawing;
+    }
+    private void OnDisable()
+    {
+        _eventManager.EnableDrawingGridSignal -= ToggleDrawing;
+    }
+
+    private void ToggleDrawing(bool boo)
+    {
+        _enableDrawing = boo;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.touchCount <= 0) return;
-        SetInputModelCellPosition();
+        if (Input.touchCount <= 0 ) return;
         DetectStateTransitionOnClick();
+        if (!_enableDrawing) return;
+        SetInputModelCellPosition();
+        
     }
 
     public void DetectStateTransitionOnClick()
@@ -42,7 +59,7 @@ public class InputController : MonoBehaviour, IInputController
         _raycastHit2D = Physics2D.Raycast(_mainCamera.ScreenToWorldPoint(_touchPosition), Vector3.back, 5, _layerMaskForGrid);
         //if (_raycastHit2D.collider == null) return;
         if (ReferenceEquals(_raycastHit2D.collider, null)) return;
-        _eventManager.DispatchInputSignal(_mainCamera.ScreenToWorldPoint(_touchPosition));
+        _eventManager.DispatchInputCoordinateSignal(_mainCamera.ScreenToWorldPoint(_touchPosition));
     }
 }
 
