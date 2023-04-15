@@ -10,12 +10,14 @@
     }
     public void Enter()
     {
+        
         _uiManager.FadeInGameOver();
         _uiManager.GridTurnWhite();
         _gameplayController.ResetVehicle();  
         _uiManager.ToggleGUIScoreCounting();
         _uiManager.ToggleBackgroundScrolling();
         _gameplayController.ToggleMapMovement();
+        
         
     }
 

@@ -90,10 +90,17 @@ public class UIManager : MonoBehaviour
         _text.text = _score.ToString("0.00");
     }
 
+    public void SetHighestScoreInGameOver()
+    {
+        _gameOverHighestScore.GetComponent<TextMeshPro>().text = IOController.instance.ReadFile().score.ToString("0.00");
+    }
     public void SetGameOverScoreText()
     {
+        Debug.Log(IOController.instance.ReadFile().score);
         _gameOverCurrentScore.GetComponent<TextMeshPro>().text = _score.ToString("0.00");
-        if (_score <= (float)Convert.ToDouble(_gameOverHighestScore.GetComponent<TextMeshPro>().text)) return;
+        float _highestScore = (float)Convert.ToDouble(IOController.instance.ReadFile().score);
+        if (_score <= _highestScore) return;
+        IOController.instance.WriteFile(_score);
         _gameOverHighestScore.GetComponent<TextMeshPro>().text = _score.ToString("0.00");
     }
 

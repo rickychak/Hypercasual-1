@@ -20,15 +20,9 @@ public class TerrainController:MonoBehaviour
     {
         _terrainModel.mapParent = mapParent;
         _mapsList = _terrainModel.GetMapGameObjects();
-        foreach (var mapGO in _mapsList)
-        {
-            _mapsQueue.Enqueue(mapGO);
-            _lastQueueObject = mapGO;
-            _mapOriginalPosition.Add(mapGO.transform.position);
-        }
-        _mapsRigidbody2DsList = mapParent.GetComponentsInChildren<Rigidbody2D>();
         
-        SetMapVelocity();
+        SetTerrainQueue();
+        
     }
 
     private void Update()
@@ -40,6 +34,21 @@ public class TerrainController:MonoBehaviour
         outBoundMap.transform.position += Vector3.up*(-outBoundMap.transform.position.y + outBoundMapYCoord);
         _lastQueueObject = outBoundMap;
         _mapsQueue.Enqueue(_lastQueueObject);
+    }
+
+    public void SetTerrainQueue()
+    {
+        
+        _mapsQueue.Clear();
+        foreach (var mapGO in _mapsList)
+        {
+            _mapsQueue.Enqueue(mapGO);
+            _lastQueueObject = mapGO;
+            _mapOriginalPosition.Add(mapGO.transform.position);
+        }
+        _mapsRigidbody2DsList = mapParent.GetComponentsInChildren<Rigidbody2D>();
+        
+        SetMapVelocity();
     }
 
 

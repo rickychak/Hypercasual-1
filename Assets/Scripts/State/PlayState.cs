@@ -26,7 +26,7 @@ public class PlayState : IState
     public void Exit()
     {
         _uiManager.ToggleGameOverCollider();
-        _uiManager.SetGameOverScoreText();
         _uiManager.ToggleButton();
+        _uiManager.SetGameOverScoreText();
     }
 }

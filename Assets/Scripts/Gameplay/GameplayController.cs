@@ -29,11 +29,16 @@ public class GameplayController : MonoBehaviour
         _terrainController.ResetMapCoordinate();
     }
 
+    public void SetTerrain()
+    {
+        _terrainController.SetTerrainQueue();
+    }
+
     public void DisableDrawing()
     {
         _eventManager.DispatchInputEnableSignal(false);
     }
-    
+
     public void EnableDrawing()
     {
         StartCoroutine(_coToggleGridDrawing(true));
