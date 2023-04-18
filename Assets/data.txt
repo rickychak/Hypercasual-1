@@ -1,1 +1,1 @@
-{"name":"Score","score":0.00}
+{"name":"Score","score":4.109490394592285}

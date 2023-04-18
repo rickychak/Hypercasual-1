@@ -34,7 +34,6 @@ public class UIManager : MonoBehaviour
     private Vector3 _gameoverScreenOriginalScale = new Vector3(900,2000,1);
     private GridController _gridController;
 
-
     private void OnEnable()
     {
         _eventManager.UserInputOnGridSignal += CellTurnBlackOnClick;
@@ -96,7 +95,6 @@ public class UIManager : MonoBehaviour
     }
     public void SetGameOverScoreText()
     {
-        Debug.Log(IOController.instance.ReadFile().score);
         _gameOverCurrentScore.GetComponent<TextMeshPro>().text = _score.ToString("0.00");
         float _highestScore = (float)Convert.ToDouble(IOController.instance.ReadFile().score);
         if (_score <= _highestScore) return;
@@ -106,6 +104,7 @@ public class UIManager : MonoBehaviour
 
     #endregion
 
+    
     #region Background
     private void BackGroundGameObjectsSetup()
     {
