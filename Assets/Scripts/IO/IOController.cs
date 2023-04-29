@@ -1,10 +1,15 @@
+using System;
+using System.Collections.Generic;
+using System.Data;
 using System.IO;
+using Newtonsoft.Json;
 using UnityEngine;
 
 public class IOController: MonoBehaviour
 {
     public static IOController instance;
-    public TextAsset jsonFile;
+    private Dictionary<string, object> jsonData = new();
+    private string dataPath;
 
     public void Awake()
     {
@@ -16,32 +21,39 @@ public class IOController: MonoBehaviour
         {
             instance = this;
         }
+        dataPath = Application.persistentDataPath+"/saveFile.json";
+        if (!File.Exists(dataPath)) CreateFile();
     }
 
-    public void WriteFile(float score)
+    public void WriteFile(object data)
     {
-        JsonData jsonData = new JsonData();
-        jsonData.name = "Score";
-        jsonData.score = score;
-        string jsonAttribute = JsonUtility.ToJson(jsonData);
-        File.WriteAllText(Application.dataPath+"/data.txt", jsonAttribute);
+        string jsonAttribute = JsonUtility.ToJson(data);
+        File.WriteAllText(dataPath, jsonAttribute);
     }
 
-    public JsonData ReadFile()
+    private void CreateFile()
     {
-        return JsonUtility.FromJson<JsonData>(jsonFile.text);
+        Debug.Log(dataPath);
+        using (StreamWriter sw = File.CreateText(dataPath))
+        {
+            sw.WriteLine("{\"scoreValue\":0.00}");
+        }
+        Debug.Log("File completed");
+    }
+
+    public Dictionary<string, object> ReadFile()
+    {
+        if (!File.Exists(dataPath)) throw new DataException("No data found");
+        
+        string saveJson = File.ReadAllText(dataPath);
+        jsonData = JsonConvert.DeserializeObject<Dictionary<string, object>>(saveJson);
+        return (jsonData);
     }
     
     
     
 }
 
-[System.Serializable]
-public class JsonData
-{
-    public string name;
-    public float score;
-}
 
 
 

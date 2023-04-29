@@ -22,13 +22,16 @@ public class UIManager : MonoBehaviour
     private GameObject _lastQueueObject;
     private List<GameObject> _backgroundsList;
     private Queue<GameObject> _backgroundsQueue = new();
-    private Rigidbody2D[] _backgroundRigidbody2DsArray; 
-    
+    private Rigidbody2D[] _backgroundRigidbody2DsArray;
+
+    private float _score;
+    public Score jsonScore;
     private readonly Color[] _colourpalette = { new Color(0.43f, 1f, 0.38f), new Color(1f, 0.5f, 0.46f) };
     private Button _button;
     private Image _image;
 
-    private float _score;
+    
+    
     private bool _isScoreCounting = false;
 
     private Vector3 _gameoverScreenOriginalScale = new Vector3(900,2000,1);
@@ -52,6 +55,7 @@ public class UIManager : MonoBehaviour
         _image = _buttonGameObject.transform.GetComponent<Image>();
         _button.onClick.AddListener(DispatchGUIButtonSignal);
         _gridController = FindObjectOfType<GridController>();
+        jsonScore = new Score();
     }
     
     #region Button
@@ -89,16 +93,17 @@ public class UIManager : MonoBehaviour
         _text.text = _score.ToString("0.00");
     }
 
-    public void SetHighestScoreInGameOver()
+    public void SetHighestScoreText()
     {
-        _gameOverHighestScore.GetComponent<TextMeshPro>().text = IOController.instance.ReadFile().score.ToString("0.00");
+        _gameOverHighestScore.GetComponent<TextMeshPro>().text = Convert.ToSingle(IOController.instance.ReadFile()["scoreValue"]).ToString("0.00");
     }
     public void SetGameOverScoreText()
     {
         _gameOverCurrentScore.GetComponent<TextMeshPro>().text = _score.ToString("0.00");
+        jsonScore.scoreValue = _score;
         //float _highestScore = (float)Convert.ToDouble(IOController.instance.ReadFile().score);
-        //if (_score <= _highestScore) return;
-        //IOController.instance.WriteFile(_score);
+        if (_score <= Convert.ToSingle(IOController.instance.ReadFile()["scoreValue"])) return;
+        IOController.instance.WriteFile(jsonScore);
         _gameOverHighestScore.GetComponent<TextMeshPro>().text = _score.ToString("0.00");
     }
 
@@ -199,4 +204,10 @@ public class UIManager : MonoBehaviour
         _score += Time.deltaTime;
         SetGUIScoreText();
     }
+}
+
+[Serializable]
+public class Score
+{
+    public float scoreValue;
 }

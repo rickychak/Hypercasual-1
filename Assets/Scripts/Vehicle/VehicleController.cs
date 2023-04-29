@@ -11,10 +11,8 @@ public class VehicleController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.LogError("Enter Collision");
         if (!col.transform.CompareTag("Boundary")) return;
         _eventManager.DispatchGameOverSignal();
-        Debug.LogError("Signal Dispatched");
     }
     
 }

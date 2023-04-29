@@ -17,6 +17,7 @@
         _uiManager.ToggleGUIScoreCounting();
         _uiManager.ToggleBackgroundScrolling();
         _gameplayController.ToggleMapMovement();
+        _uiManager.SetHighestScoreText();
         
         
     }

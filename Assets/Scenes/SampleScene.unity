@@ -1149,6 +1149,8 @@ MonoBehaviour:
   backgroundParent: {fileID: 160192975}
   leftBound: {fileID: 1948988368}
   _tilemap: {fileID: 964885385}
+  jsonScore:
+    scoreValue: 0
 --- !u!114 &704679159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1237,7 +1239,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4c0b2f295069cd4dbab40546c5ca30d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jsonFile: {fileID: 4900000, guid: 25a77acbd89bf3f4a80387dd17935e04, type: 3}
 --- !u!1 &909582265
 GameObject:
   m_ObjectHideFlags: 0
