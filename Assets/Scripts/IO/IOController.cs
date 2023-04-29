@@ -13,6 +13,7 @@ public class IOController: MonoBehaviour
 
     public void Awake()
     {
+        dataPath = Application.persistentDataPath+"/saveFile.json";
         if (instance != null && instance != this)
         {
             Destroy(this);
@@ -21,7 +22,6 @@ public class IOController: MonoBehaviour
         {
             instance = this;
         }
-        dataPath = Application.persistentDataPath+"/saveFile.json";
         if (!File.Exists(dataPath)) CreateFile();
     }
 
@@ -33,18 +33,15 @@ public class IOController: MonoBehaviour
 
     private void CreateFile()
     {
-        Debug.Log(dataPath);
         using (StreamWriter sw = File.CreateText(dataPath))
         {
             sw.WriteLine("{\"scoreValue\":0.00}");
         }
-        Debug.Log("File completed");
     }
 
     public Dictionary<string, object> ReadFile()
     {
         if (!File.Exists(dataPath)) throw new DataException("No data found");
-        
         string saveJson = File.ReadAllText(dataPath);
         jsonData = JsonConvert.DeserializeObject<Dictionary<string, object>>(saveJson);
         return (jsonData);

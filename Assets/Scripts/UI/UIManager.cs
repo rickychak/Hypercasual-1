@@ -177,7 +177,7 @@ public class UIManager : MonoBehaviour
    
     #endregion
 
-    #region GameOverScreem
+    #region GameOverScreen
     public void FadeInGameOver()
     {
         Tween myTween = _gameOverScreen.transform.DOScale(_gameoverScreenOriginalScale, 0.5f);
