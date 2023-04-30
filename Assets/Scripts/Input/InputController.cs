@@ -47,7 +47,6 @@ public class InputController : MonoBehaviour, IInputController
 
     public void DetectStateTransitionOnClick()
     {
-        
         _raycastHit2D = Physics2D.Raycast(_mainCamera.ScreenToWorldPoint(_touchPosition), Vector3.back, 5, _layerMaskForScreen);
         if (ReferenceEquals(_raycastHit2D.collider, null)) return;
         _eventManager.DispatchGUIButtonSignal();
@@ -57,7 +56,6 @@ public class InputController : MonoBehaviour, IInputController
     {
         _touchPosition = Input.GetTouch(0).position;
         _raycastHit2D = Physics2D.Raycast(_mainCamera.ScreenToWorldPoint(_touchPosition), Vector3.back, 5, _layerMaskForGrid);
-        //if (_raycastHit2D.collider == null) return;
         if (ReferenceEquals(_raycastHit2D.collider, null)) return;
         _eventManager.DispatchInputCoordinateSignal(_mainCamera.ScreenToWorldPoint(_touchPosition));
     }

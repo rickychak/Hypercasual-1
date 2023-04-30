@@ -10,6 +10,9 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private EventManager _eventManager;
     [SerializeField] private GameObject _buttonGameObject;
+    [SerializeField] private GameObject mainMenuStartButton;
+    [SerializeField] private GameObject mainMenuQuitButton;
+    [SerializeField] private GameObject _mainMenuHighestScore;
     [SerializeField] private GameObject _gameOverScreen;
     [SerializeField] private GameObject _gameOverHighestScore;
     [SerializeField] private GameObject _gameOverCurrentScore;
@@ -73,10 +76,38 @@ public class UIManager : MonoBehaviour
     {
         _button.enabled = !_button.enabled;
     }
+
+    public void SetupMainMenuButtonsListeners()
+    {
+        mainMenuStartButton.GetComponent<Button>().onClick.AddListener(_eventManager.DispatchGUIButtonSignal);
+        mainMenuQuitButton.GetComponent<Button>().onClick.AddListener(QuitApplication);
+    }
+
+    public void RemoveMainMenuButtonsListeners()
+    {
+        mainMenuStartButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        mainMenuQuitButton.GetComponent<Button>().onClick.RemoveAllListeners();
+    }
     
     #endregion
 
-    #region Score 
+    #region Score
+
+    public void SetMainMenuHighestScoreText()
+    {
+        _mainMenuHighestScore.GetComponent<TextMeshPro>().text =
+            Convert.ToSingle(IOController.instance.ReadFile()["scoreValue"]).ToString("0.00");
+    }
+    public void ToggleHighestScoreVisibility()
+    {
+        var textparent = _mainMenuHighestScore.gameObject.transform.parent;
+        textparent.gameObject.SetActive(!textparent.gameObject.activeSelf);
+    }
+    public void ToggleGameScoreVisibility()
+    {
+        var textparent = _text.gameObject.transform.parent;
+        textparent.gameObject.SetActive(!textparent.gameObject.activeSelf);
+    }
     public void ToggleGUIScoreCounting()
     {
         _isScoreCounting = !_isScoreCounting;
@@ -109,7 +140,6 @@ public class UIManager : MonoBehaviour
 
     #endregion
 
-    
     #region Background
     private void BackGroundGameObjectsSetup()
     {
@@ -194,9 +224,20 @@ public class UIManager : MonoBehaviour
         _gameOverScreen.transform.GetComponent<BoxCollider2D>().enabled = !_gameOverScreen.transform.GetComponent<BoxCollider2D>().enabled;
     }
     #endregion
+
+    #region MainMenuScreen
     
-    
-    
+    public void FadeOutMainMenu()
+    {
+        Tween myTween = mainMenuStartButton.transform.parent.transform.DOScale(Vector3.zero, 0.5f);
+    }
+
+    #endregion
+
+    private void QuitApplication()
+    {
+        Application.Quit();
+    }
     private void Update()
     {
         if(_backgroundsQueue.Peek().transform.position.x+0.5f < leftBound.transform.position.x) BackgroundReposition();

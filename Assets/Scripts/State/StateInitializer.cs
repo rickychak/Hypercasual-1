@@ -3,7 +3,7 @@ using UnityEngine;
 
 public enum StateEnum
 {
-    MenuState,
+    MainMenuState,
     DrawState,
     PlayState,
     GameOverState,
@@ -25,6 +25,7 @@ public class StateInitializer : MonoBehaviour
         _stateMachine = new StateMachine();
         _eventManager.GUIButtonClickSignal += OnGUIButtonClick;
         _eventManager.GameOverSignal += OnGUIButtonClick;
+        _stateDict.Add(StateEnum.MainMenuState, new MainMenuState(_uiManager, _gameplayController));
         _stateDict.Add(StateEnum.DrawState, new DrawState(_uiManager, _gameplayController));
         _stateDict.Add(StateEnum.PlayState, new PlayState(_uiManager, _gameplayController));
         _stateDict.Add(StateEnum.GameOverState, new GameOverState(_uiManager, _gameplayController));

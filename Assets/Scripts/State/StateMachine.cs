@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
 public class StateMachine
 {
@@ -9,7 +8,7 @@ public class StateMachine
     public void Initialize(Dictionary<StateEnum, IState> stateDict)
     {
         _stateDict = stateDict;
-        _currentState = _stateDict[StateEnum.DrawState];
+        _currentState = _stateDict[StateEnum.MainMenuState];
         _currentState.Enter();
     }
 
@@ -18,6 +17,9 @@ public class StateMachine
         _currentState.Exit();
         switch (_currentState)
         {
+            case MainMenuState:
+                _currentState = _stateDict[StateEnum.DrawState];
+                break;
             case DrawState:
                 _currentState = _stateDict[StateEnum.PlayState];
                 break;

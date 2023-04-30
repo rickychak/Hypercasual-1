@@ -13,6 +13,7 @@ public class DrawState : IState
 
     public void Enter()
     {
+        _gameplayController.EnableDrawing();
         _uiManager.GUIButtonChangeColorOnClick(0);
         _uiManager.ResetGUIScore();
         _gameplayController.ResetMap();
