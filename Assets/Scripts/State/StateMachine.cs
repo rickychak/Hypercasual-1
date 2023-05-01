@@ -24,6 +24,9 @@ public class StateMachine
                 _currentState = _stateDict[StateEnum.PlayState];
                 break;
             case PlayState:
+                _currentState = _stateDict[StateEnum.AdState];
+                break;
+            case AdState:
                 _currentState = _stateDict[StateEnum.GameOverState];
                 break;
             case GameOverState:

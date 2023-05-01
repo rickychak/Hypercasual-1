@@ -13,10 +13,8 @@
         
         _uiManager.FadeInGameOver();
         _uiManager.GridTurnWhite();
-        _gameplayController.ResetVehicle();  
-        _uiManager.ToggleGUIScoreCounting();
+        _gameplayController.ResetVehicle();
         _uiManager.ToggleBackgroundScrolling();
-        _gameplayController.ToggleMapMovement();
         _uiManager.SetHighestScoreText();
         
         

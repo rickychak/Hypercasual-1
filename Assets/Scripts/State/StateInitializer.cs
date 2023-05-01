@@ -7,7 +7,7 @@ public enum StateEnum
     DrawState,
     PlayState,
     GameOverState,
-    RestartState
+    AdState
 }
 
 
@@ -17,6 +17,7 @@ public class StateInitializer : MonoBehaviour
     [SerializeField] private UIManager _uiManager;
     [SerializeField] private GameplayController _gameplayController;
     [SerializeField] private EventManager _eventManager;
+    [SerializeField] private AdsInterstitial _adsInterstitial;
 
     private Dictionary<StateEnum, IState> _stateDict = new();
 
@@ -27,7 +28,8 @@ public class StateInitializer : MonoBehaviour
         _eventManager.GameOverSignal += OnGUIButtonClick;
         _stateDict.Add(StateEnum.MainMenuState, new MainMenuState(_uiManager, _gameplayController));
         _stateDict.Add(StateEnum.DrawState, new DrawState(_uiManager, _gameplayController));
-        _stateDict.Add(StateEnum.PlayState, new PlayState(_uiManager, _gameplayController));
+        _stateDict.Add(StateEnum.PlayState, new PlayState(_uiManager, _gameplayController, _adsInterstitial));
+        _stateDict.Add(StateEnum.AdState, new AdState(_uiManager, _gameplayController));
         _stateDict.Add(StateEnum.GameOverState, new GameOverState(_uiManager, _gameplayController));
         _stateMachine.Initialize(_stateDict);
     }
