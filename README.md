@@ -1,2 +1,2 @@
 # Hypercasual-1
-Rapid Fire Shipping
+Rapid Fire Shipping (Shipped)
